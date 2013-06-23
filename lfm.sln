@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "lfm", "lfm\lfm.pyproj", "{EFA442ED-DB23-4367-BD56-CC7309B0BB77}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "lfm_test", "lfm_test\lfm_test.pyproj", "{217FDA5C-A3C3-431F-952B-306463128ACB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFA442ED-DB23-4367-BD56-CC7309B0BB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA442ED-DB23-4367-BD56-CC7309B0BB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA442ED-DB23-4367-BD56-CC7309B0BB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA442ED-DB23-4367-BD56-CC7309B0BB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217FDA5C-A3C3-431F-952B-306463128ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217FDA5C-A3C3-431F-952B-306463128ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217FDA5C-A3C3-431F-952B-306463128ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217FDA5C-A3C3-431F-952B-306463128ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

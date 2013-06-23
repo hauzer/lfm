@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>efa442ed-db23-4367-bd56-cc7309b0bb77</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>lfm</Name>
+    <RootNamespace>lfm</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="album\add_tags.py" />
+    <Compile Include="album\get_buy_links.py" />
+    <Compile Include="album\get_info.py" />
+    <Compile Include="album\get_shouts.py" />
+    <Compile Include="album\get_tags.py" />
+    <Compile Include="album\get_top_tags.py" />
+    <Compile Include="album\remove_tag.py" />
+    <Compile Include="album\search.py" />
+    <Compile Include="album\share.py" />
+    <Compile Include="album\__init__.py" />
+    <Compile Include="artist\add_tags.py" />
+    <Compile Include="artist\get_correction.py" />
+    <Compile Include="artist\get_events.py" />
+    <Compile Include="artist\get_info.py" />
+    <Compile Include="artist\get_past_events.py" />
+    <Compile Include="artist\get_podcast.py" />
+    <Compile Include="artist\get_shouts.py" />
+    <Compile Include="artist\get_similar.py" />
+    <Compile Include="artist\get_tags.py" />
+    <Compile Include="artist\get_top_albums.py" />
+    <Compile Include="artist\get_top_fans.py" />
+    <Compile Include="artist\get_top_tags.py" />
+    <Compile Include="artist\get_top_tracks.py" />
+    <Compile Include="artist\remove_tag.py" />
+    <Compile Include="artist\search.py" />
+    <Compile Include="artist\share.py" />
+    <Compile Include="artist\shout.py" />
+    <Compile Include="artist\__init__.py" />
+    <Compile Include="auth\get_mobile_session.py" />
+    <Compile Include="auth\get_session.py" />
+    <Compile Include="auth\get_token.py" />
+    <Compile Include="auth\__init__.py" />
+    <Compile Include="chart\get_hyped_artists.py" />
+    <Compile Include="chart\get_hyped_tracks.py" />
+    <Compile Include="chart\get_loved_tracks.py" />
+    <Compile Include="chart\get_top_artists.py" />
+    <Compile Include="chart\get_top_tags.py" />
+    <Compile Include="chart\get_top_tracks.py" />
+    <Compile Include="chart\__init__.py" />
+    <Compile Include="event\attend.py" />
+    <Compile Include="event\get_attendees.py" />
+    <Compile Include="event\get_info.py" />
+    <Compile Include="event\get_shouts.py" />
+    <Compile Include="event\share.py" />
+    <Compile Include="event\shout.py" />
+    <Compile Include="event\__init__.py" />
+    <Compile Include="geo\get_events.py" />
+    <Compile Include="geo\get_metros.py" />
+    <Compile Include="geo\get_metro_artist_chart.py" />
+    <Compile Include="geo\get_metro_hype_artist_chart.py" />
+    <Compile Include="geo\get_metro_hype_track_chart.py" />
+    <Compile Include="geo\get_metro_track_chart.py" />
+    <Compile Include="geo\get_metro_unique_artist_chart.py" />
+    <Compile Include="geo\get_metro_unique_track_chart.py" />
+    <Compile Include="geo\get_metro_weekly_chart_list.py" />
+    <Compile Include="geo\get_top_artists.py" />
+    <Compile Include="geo\get_top_tracks.py" />
+    <Compile Include="geo\__init__.py" />
+    <Compile Include="group\get_hype.py" />
+    <Compile Include="group\get_members.py" />
+    <Compile Include="group\get_weekly_album_chart.py" />
+    <Compile Include="group\get_weekly_artist_chart.py" />
+    <Compile Include="group\get_weekly_chart_list.py" />
+    <Compile Include="group\get_weekly_track_chart.py" />
+    <Compile Include="group\__init__.py" />
+    <Compile Include="library\add_album.py" />
+    <Compile Include="library\add_artist.py" />
+    <Compile Include="library\add_track.py" />
+    <Compile Include="library\get_albums.py" />
+    <Compile Include="library\get_artists.py" />
+    <Compile Include="library\get_tracks.py" />
+    <Compile Include="library\remove_album.py" />
+    <Compile Include="library\remove_artist.py" />
+    <Compile Include="library\remove_scrobble.py" />
+    <Compile Include="library\remove_track.py" />
+    <Compile Include="library\__init__.py" />
+    <Compile Include="playlist\add_track.py" />
+    <Compile Include="playlist\create.py" />
+    <Compile Include="playlist\__init__.py" />
+    <Compile Include="radio\get_playlist.py" />
+    <Compile Include="radio\search.py" />
+    <Compile Include="radio\tune.py" />
+    <Compile Include="radio\__init__.py" />
+    <Compile Include="tag\get_info.py" />
+    <Compile Include="tag\get_similar.py" />
+    <Compile Include="tag\get_top_albums.py" />
+    <Compile Include="tag\get_top_artists.py" />
+    <Compile Include="tag\get_top_tags.py" />
+    <Compile Include="tag\get_top_tracks.py" />
+    <Compile Include="tag\get_weekly_artist_chart.py" />
+    <Compile Include="tag\search.py" />
+    <Compile Include="tag\__init__.py" />
+    <Compile Include="tasteometer\compare.py" />
+    <Compile Include="tasteometer\compare_group.py" />
+    <Compile Include="tasteometer\__init__.py" />
+    <Compile Include="track\add_tags.py" />
+    <Compile Include="track\ban.py" />
+    <Compile Include="track\get_buy_links.py" />
+    <Compile Include="track\get_correction.py" />
+    <Compile Include="track\get_fingerprint_metadata.py" />
+    <Compile Include="track\get_info.py" />
+    <Compile Include="track\get_shouts.py" />
+    <Compile Include="track\get_similar.py" />
+    <Compile Include="track\get_tags.py" />
+    <Compile Include="track\get_top_fans.py" />
+    <Compile Include="track\get_top_tags.py" />
+    <Compile Include="track\love.py" />
+    <Compile Include="track\remove_tag.py" />
+    <Compile Include="track\scrobble.py" />
+    <Compile Include="track\search.py" />
+    <Compile Include="track\share.py" />
+    <Compile Include="track\unban.py" />
+    <Compile Include="track\unlove.py" />
+    <Compile Include="track\update_now_playing.py" />
+    <Compile Include="track\__init__.py" />
+    <Compile Include="user\get_artist_tracks.py" />
+    <Compile Include="user\get_banned_tracks.py" />
+    <Compile Include="user\get_events.py" />
+    <Compile Include="user\get_friends.py" />
+    <Compile Include="user\get_info.py" />
+    <Compile Include="user\get_loved_tracks.py" />
+    <Compile Include="user\get_neighbours.py" />
+    <Compile Include="user\get_new_releases.py" />
+    <Compile Include="user\get_past_events.py" />
+    <Compile Include="user\get_personal_tags.py" />
+    <Compile Include="user\get_playlists.py" />
+    <Compile Include="user\get_recent_stations.py" />
+    <Compile Include="user\get_recent_tracks.py" />
+    <Compile Include="user\get_recommended_artists.py" />
+    <Compile Include="user\get_recommended_events.py" />
+    <Compile Include="user\get_shouts.py" />
+    <Compile Include="user\get_top_artists.py" />
+    <Compile Include="user\get_top_tags.py" />
+    <Compile Include="user\get_top_tracks.py" />
+    <Compile Include="user\get_weekly_album_chart.py" />
+    <Compile Include="user\get_weekly_artist_chart.py" />
+    <Compile Include="user\get_weekly_chart_list.py" />
+    <Compile Include="user\get_weekly_track_chart.py" />
+    <Compile Include="user\shout.py" />
+    <Compile Include="user\sing_up.py" />
+    <Compile Include="user\terms.py" />
+    <Compile Include="user\__init__.py" />
+    <Compile Include="venue\get_events.py" />
+    <Compile Include="venue\get_past_events.py" />
+    <Compile Include="venue\search.py" />
+    <Compile Include="venue\__init__.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="auth\" />
+    <Folder Include="album\" />
+    <Folder Include="artist\" />
+    <Folder Include="chart\" />
+    <Folder Include="event\" />
+    <Folder Include="geo\" />
+    <Folder Include="group\" />
+    <Folder Include="library\" />
+    <Folder Include="venue\" />
+    <Folder Include="user\" />
+    <Folder Include="track\" />
+    <Folder Include="tasteometer\" />
+    <Folder Include="tag\" />
+    <Folder Include="radio\" />
+    <Folder Include="playlist" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>
