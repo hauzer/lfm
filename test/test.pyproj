@@ -3,15 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>efa442ed-db23-4367-bd56-cc7309b0bb77</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
-    <SearchPath>C:\Python33\Lib\site-packages\requests-1.2.3-py3.3.egg</SearchPath>
+    <ProjectGuid>217fda5c-a3c3-431f-952b-306463128acb</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>test.py</StartupFile>
+    <SearchPath>..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>lfm</Name>
-    <RootNamespace>lfm</RootNamespace>
+    <Name>test</Name>
+    <RootNamespace>lfm_test</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <CommandLineArguments />
     <InterpreterPath />
@@ -26,11 +26,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="album.py" />
-    <Compile Include="artist.py" />
-    <Compile Include="auth.py" />
-    <Compile Include="lfm.py" />
-    <Compile Include="__init__.py" />
+    <Compile Include="test.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
