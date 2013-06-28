@@ -26,11 +26,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="album.py" />
-    <Compile Include="artist.py" />
-    <Compile Include="auth.py" />
+    <Compile Include="api\album.py" />
+    <Compile Include="api\artist.py" />
+    <Compile Include="api\auth.py" />
+    <Compile Include="api\chart.py" />
+    <Compile Include="api\event.py" />
+    <Compile Include="api\geo.py" />
+    <Compile Include="api\group.py" />
+    <Compile Include="api\library.py" />
     <Compile Include="lfm.py" />
     <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="api\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

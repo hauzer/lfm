@@ -1,4 +1,4 @@
-from . import lfm
+from lfm import lfm
 
 class Token:
     token = ""
@@ -13,15 +13,17 @@ class Token:
 pkg = "auth"
 
 def get_mobile_session(username, password):
-    data = lfm.request(pkg)
+    data = lfm.request_auto(pkg)
     return data["session"]
+
 
 def get_session(token):
-    data = lfm.request(pkg)
+    data = lfm.request_auto(pkg)
     return data["session"]
 
+
 def get_token():
-    data = lfm.request(pkg)
+    data = lfm.request_auto(pkg)
 
     token = Token(data["token"])
     return token

@@ -1,2 +1,2 @@
 syntax: glob
-lfm/__pycache__/*
+*__pycache__*
