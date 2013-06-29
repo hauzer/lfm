@@ -1,13 +1,9 @@
 from lfm import lfm
 
 
-pkg = "tasteometer"
+_pkg = "tasteometer"
 
 
 def compare(type1, value1, type2, value2, limit = None):
-    data = lfm.request_auto(pkg)
+    data = lfm.request_auto(_pkg)
     return data["comparison"]
-
-
-def compare_group():
-    pass
