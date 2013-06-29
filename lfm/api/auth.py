@@ -1,5 +1,6 @@
 from lfm import lfm
 
+
 class Token:
     token = ""
 
@@ -11,6 +12,7 @@ class Token:
 
 
 pkg = "auth"
+
 
 def get_mobile_session(username, password):
     data = lfm.request_auto(pkg)

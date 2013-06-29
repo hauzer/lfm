@@ -34,6 +34,11 @@
     <Compile Include="api\geo.py" />
     <Compile Include="api\group.py" />
     <Compile Include="api\library.py" />
+    <Compile Include="api\playlist.py" />
+    <Compile Include="api\radio.py" />
+    <Compile Include="api\tag.py" />
+    <Compile Include="api\tasteometer.py" />
+    <Compile Include="api\track.py" />
     <Compile Include="lfm.py" />
     <Compile Include="__init__.py" />
   </ItemGroup>
