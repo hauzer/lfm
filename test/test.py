@@ -1,5 +1,6 @@
 import webbrowser;
-import lfm.lfm, lfm.api.auth, lfm.api.album, lfm.api.library
+import time
+import lfm.lfm, lfm.api.auth, lfm.api.album, lfm.api.library, lfm.api.track
 
 app = lfm.lfm.App("b07bfe5accc130311e9256ae3bd6d67c", "88ea86c8bbbece2613d99744ab1fc9cc")
 lfm.lfm.app = app
@@ -20,5 +21,9 @@ app.sk = session["key"]
 #lfm.api.library.add_album({("Metallica", "Metallica"), ("Kansas", "Masque"), ("Kansas", "Freaks of Nature")})
 #lfm.api.library.add_artist({"Gentle Giant", "Ludwig van Beethoven", "Riverside"})
 lfm.api.library.get_albums("hauzzer", "Kansas")
+
+lfm.api.track.scrobble([lfm.api.track.Scrobble("Kansas", "Hold On", int(time.time())),
+                        lfm.api.track.Scrobble("Metallica", "Whiplash", int(time.time()), "Kill 'em all", 240),
+                        lfm.api.track.Scrobble("Riverside", "Rainbow Box", int(time.time()), albumartist = "Riverside")])
 
 input()

@@ -39,6 +39,8 @@
     <Compile Include="api\tag.py" />
     <Compile Include="api\tasteometer.py" />
     <Compile Include="api\track.py" />
+    <Compile Include="api\user.py" />
+    <Compile Include="api\venue.py" />
     <Compile Include="lfm.py" />
     <Compile Include="__init__.py" />
   </ItemGroup>

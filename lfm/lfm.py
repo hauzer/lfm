@@ -16,36 +16,6 @@ app = App("", "")
 api_root = "https://ws.audioscrobbler.com/2.0/"
 
 
-def sign(params):
-    """
-    Generates an API signature, which is needed for authorized API requests.
-
-    params: A dictionary of all parameters intended to be sent with an API request.
-
-    returns: An API signature.
-
-    """
-
-    # Parameters are alphabetically sorted by their key, and then concatenated
-    # in a keyvalue manner. The application's secret is appended afterwards,
-    # the whole thing is UTF-8 encoded, and then md5() hashed, hex digest of it
-    # being the signature. The parameter "format" isn't included in the calculation.
-
-    # Keys excluded from the calculation
-    forbid_keys = ["format"]
-
-    concat_params = ""
-    for key in sorted(list(params)):
-        if key not in forbid_keys:
-            concat_params += key + params[key]
-
-    concat_params += app.secret
-
-    sig = hashlib.md5(concat_params.encode('utf-8')).hexdigest()
-    
-    return sig
-
-
 def request(pkg, method, params):
     """
     Makes an API request.
@@ -80,12 +50,8 @@ def request(pkg, method, params):
 
     params["api_sig"] = sign(params)
 
-    print(str(params) + "\n")
-
     resp = requests.post(api_root, params)
     data = json.loads(resp.text)
-
-    print(str(data) + "\n\n")
 
     return data
 
@@ -99,8 +65,8 @@ def request_auto(pkg, special_params = None, method = None):
     is used as the API method. The caller's argument names are parameter keys,
     and argument values are parameter values. Argument names are stripped of
     trailing underscores, to permit use of keywords.
-    special_params can be used to override any parameter, and add any number of
-    additional ones.
+    special_params can be used to override any parameter, and add or change any
+    number of additional ones.
 
     pkg                  : The name of the package in which the method resides.
     special_params = None: Additional or modified parameters to be used.
@@ -125,3 +91,33 @@ def request_auto(pkg, special_params = None, method = None):
     params = dict([(key.rstrip('_'), params[key]) for key in params])
 
     return request(pkg, method, params)
+
+
+def sign(params):
+    """
+    Generates an API signature, which is needed for authorized API requests.
+
+    params: A dictionary of all parameters intended to be sent with an API request.
+
+    returns: An API signature.
+
+    """
+
+    # Parameters are alphabetically sorted by their key, and then concatenated
+    # in a keyvalue manner. The application's secret is appended afterwards,
+    # the whole thing is UTF-8 encoded, and then md5() hashed, hex digest of it
+    # being the signature. Some parameters mustn't be included in the calculation.
+
+    # Keys excluded from the calculation
+    forbid_keys = ["format"]
+
+    concat_params = ""
+    for key in sorted(list(params)):
+        if key not in forbid_keys:
+            concat_params += key + params[key]
+
+    concat_params += app.secret
+
+    sig = hashlib.md5(concat_params.encode('utf-8')).hexdigest()
+    
+    return sig
