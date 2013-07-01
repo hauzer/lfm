@@ -5,7 +5,7 @@ _pkg = "event"
 
 
 def attend(event, status):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def get_attendees(event, page = None, limit = None):
@@ -24,8 +24,8 @@ def get_shouts(event, page = None, limit = None):
 
 
 def share(event, recipient, message = None, public = None):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def shout(event, message):
-    data = request_auto(_pkg)
+    request_auto(_pkg)

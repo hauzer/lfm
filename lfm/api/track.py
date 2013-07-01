@@ -33,11 +33,11 @@ _pkg = "track"
 
 
 def add_tags(artist, track, tags):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def ban(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def get_buy_links(country, artist = None, track = None, autocorrect = None, mbid = None):
@@ -86,11 +86,11 @@ def get_top_tags(artist = None, track = None, autocorrect = None, mbid = None):
 
 
 def love(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def remove_tag(artist, track, tag):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def scrobble(scrobbles):
@@ -108,15 +108,15 @@ def search(track, artist = None, page = None, limit = None):
 
 
 def share(artist, track, recipient, message = None, public = None):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def unban(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def unlove(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def update_now_playing(artist, track, album = None, duration = None, tracknumber = None, albumartist = None, \

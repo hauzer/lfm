@@ -125,4 +125,4 @@ def get_weekly_track_chart(user, from_ = None, to = None):
 
 
 def shout(user, message):
-    data = request_auto(_pkg)
+    request_auto(_pkg)

@@ -4,7 +4,7 @@ _pkg = "album"
 
 
 def add_tags(artist, album, tags):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def get_buy_links(country, artist = None, album = None, mbid = None, autocorrect = None):
@@ -33,7 +33,7 @@ def get_top_tags(artist = None, album = None, mbid = None, autocorrect = None):
 
 
 def remove_tag(tag, artist, album):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def search(album, page = None, limit = None):
