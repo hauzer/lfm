@@ -32,9 +32,6 @@ def request(pkg, method, params):
 
     """
 
-    print(app.key)
-    print(app.secret)
-
     params.update({"api_key": app.key,
                    "method": pkg + "." + method,
                    "sk": app.sk,
