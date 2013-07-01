@@ -1,13 +1,13 @@
-from lfm import lfm
+from lfm.lfm import request_auto
 
 
 _pkg = "playlist"
 
 
 def add_track(playlistid, artist, track):
-    data = lfm.request_auto(_pkg)
+    data = request_auto(_pkg)
 
 
 def create(title = None, description = None):
-    data = lfm.request_auto(_pkg)
+    data = request_auto(_pkg)
     
