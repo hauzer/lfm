@@ -13,57 +13,57 @@ def get_corrections(artist):
     return data["corrections"]
 
 
-def get_events(artist = None, mbid = None, autocorrect = None, page = None, limit = None, festivalsonly = None):
+def get_events(artist = None, page = None, limit = None, autocorrect = None, festivalsonly = None, mbid = None):
     data = request_auto(_pkg)
     return data["events"]
 
 
-def get_info(artist = None, mbid = None, lang = None, autocorrect = None, username = None):
+def get_info(artist = None, username = None, autocorrect = None, lang = None, mbid = None):
     data = request_auto(_pkg)
     return data["artist"]
 
 
-def get_past_events(artist = None, mbid = None, autocorrect = None, page = None, limit = None):
+def get_past_events(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["events"]
 
 
-def get_podcast(artist = None, mbid = None, autocorrect = None):
+def get_podcast(artist = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["rss"]
 
 
-def get_shouts(artist = None, mbid = None, autocorrect = None, page = None, limit = None):
+def get_shouts(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["shouts"]
 
 
-def get_similar(artist = None, mbid = None, autocorrect = None, limit = None):
+def get_similar(artist = None, limit = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["similarartists"]
 
 
-def get_tags(artist = None, mbid = None, autocorrect = None, user = None):
+def get_tags(artist = None, user = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["tags"]
 
 
-def get_top_albums(artist = None, mbid = None, autocorrect = None, page = None, limit = None):
+def get_top_albums(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["topalbums"]
 
 
-def get_top_fans(artist = None, mbid = None, autocorrect = None):
+def get_top_fans(artist = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["topfans"]
 
 
-def get_top_tags(artist = None, mbid = None, autocorrect = None):
+def get_top_tags(artist = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["toptags"]
 
 
-def get_top_tracks(artist = None, mbid = None, autocorrect = None, page = None, limit = None):
+def get_top_tracks(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
     data = request_auto(_pkg)
     return data["toptracks"]
 
