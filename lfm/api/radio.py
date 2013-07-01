@@ -1,19 +1,19 @@
-from lfm import lfm
+from lfm.lfm import request_auto
 
 
 _pkg = "radio"
 
 
 def get_playlist(bitrate = None, rtp = None, discovery = None, speed_multiplier = None, buylinks = None):
-    data = lfm.request_auto(_pkg)
+    data = request_auto(_pkg)
     return data["playlist"]
 
 
 def search(name):
-    data = lfm.request_auto(_pkg)
+    data = request_auto(_pkg)
     return data["stations"]
 
 
 def tune(station, lang = None):
-    data = lfm.request_auto(_pkg)
+    data = request_auto(_pkg)
     return data["station"]

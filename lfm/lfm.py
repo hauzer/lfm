@@ -35,23 +35,29 @@ def request(pkg, method, params):
 
     # Remove keys with a value of None.
     params = dict((key, params[key]) for key in params if params[key] is not None)
-
-    # A dictionary of to-string converters, as required by the API.
-    conv = { bool: lambda x: "1" if x else "0" }
     
-    for key in params:
-        valtype = type(params[key])
+    # Convert all objects to strings, as expected by the API
+    for key in params.copy():
+        if isinstance(params[key], bool):
+            if params[key]:
+                params[key] = "1"
+            else:
+                params[key] = "0"
 
-        if valtype in conv:
-            params[key] = conv[valtype](params[key])
+        elif not isinstance(params[key], str):
+            try:
+                params[key] = ",".join(params[key])
 
-        else:
-            params[key] = str(params[key])
+            except TypeError:
+                params[key] = str(params[key])
+            
+    print(params)
 
     params["api_sig"] = sign(params)
 
     resp = requests.post(api_root, params)
     data = json.loads(resp.text)
+    print(data)
 
     return data
 
@@ -81,9 +87,9 @@ def request_auto(pkg, special_params = None, method = None):
     if(method is None):
         method = frame_record[3].replace("_", "")
 
-    args, _, _, locals = inspect.getargvalues(frame_record[0])
+    args, _, _, locals_ = inspect.getargvalues(frame_record[0])
 
-    params = dict([(arg, locals[arg]) for arg in args])
+    params = dict([(arg, locals_[arg]) for arg in args])
 
     if(special_params is not None):
         params.update(special_params)
@@ -121,3 +127,47 @@ def sign(params):
     sig = hashlib.md5(concat_params.encode('utf-8')).hexdigest()
     
     return sig
+
+
+def to_array(xs, key):
+    array = {}
+
+    for i, x in enumerate(xs):
+        array[key + "[" + str(i) + "]"] = x
+
+    return array
+
+
+def to_arrays(xs, keys):
+    arrays = {}
+
+    for x, key in zip(list(zip(*xs)), keys):
+        arrays.update(to_array(x, key))
+
+    return arrays
+
+
+def class_to_arrays(klas, i = 0):
+    attrs = [(key, value) for key, value in inspect.getmembers(klas)
+                    if not callable(value) and not(key.startswith("__") and key.endswith("__"))]
+    
+    arrays = {}
+    for key, value in attrs:
+        arrays[key + "[" + str(i) + "]"] = value
+
+    return arrays
+
+def classes_to_arrays(klasses):
+    arrays = {}
+    for i, klas in enumerate(klasses):
+        arrays.update(class_to_arrays(klas, i))
+
+    return arrays
+
+def get_token_url(token):
+    """
+    Returns the authentication page of a token.
+
+    """
+
+    return "http://www.last.fm/api/auth/?api_key=" + app.key + "&token=" + token
