@@ -1,6 +1,5 @@
 from lfm.lfm import request_auto
 
-
 _pkg = "album"
 
 

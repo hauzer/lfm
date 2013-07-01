@@ -10,6 +10,9 @@ class App:
         self.key = key
         self.secret = secret
 
+    def activate(self):
+        global app
+        app = self
 
 # The currently active application
 app = App("", "")
@@ -27,6 +30,9 @@ def request(pkg, method, params):
     returns: A JSON response.
 
     """
+
+    print(app.key)
+    print(app.secret)
 
     params.update({"api_key": app.key,
                    "method": pkg + "." + method,
