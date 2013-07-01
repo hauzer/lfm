@@ -5,7 +5,7 @@ _pkg = "artist"
 
 
 def add_tags(artist, tags):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def get_corrections(artist):
@@ -69,7 +69,7 @@ def get_top_tracks(artist = None, mbid = None, autocorrect = None, page = None, 
 
 
 def remove_tag(artist, tag):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def search(artist, page, limit):
@@ -78,8 +78,8 @@ def search(artist, page, limit):
 
 
 def share(artist, recipient, message = None, public = None):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def shout(artist, message):
-    data = request_auto(_pkg)
+    request_auto(_pkg)

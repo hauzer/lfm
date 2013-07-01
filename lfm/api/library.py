@@ -21,7 +21,7 @@ def add_artist(artists):
 
 
 def add_track(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def get_albums(user, artist, limit = None, page = None):
@@ -40,16 +40,16 @@ def get_tracks(user, artist, album, limit = None, page = None):
 
 
 def remove_album(artist, album):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def remove_artist(artist):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def remove_scrobble(artist, track, timestamp):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
 
 
 def remove_track(artist, track):
-    data = request_auto(_pkg)
+    request_auto(_pkg)
