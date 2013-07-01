@@ -4,38 +4,37 @@ from lfm.lfm import request_auto
 _pkg = "geo"
 
 
-def get_events(long = None, lat = None, location = None, distance = None, page = None, limit = None, \
-               tag = None, festivalsonly = None):
+def get_events(tag = None, page = None, limit = None, long = None, lat = None, location = None, distance = None, festivalsonly = None):
     data = request_auto(_pkg)
     return data["events"]
 
 
-def get_metro_artist_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["topartists"]
 
 
-def get_metro_hype_artist_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_hype_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["topartists"]
 
 
-def get_metro_hype_track_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_hype_track_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["toptracks"]
 
 
-def get_metro_track_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_track_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["toptracks"]
 
 
-def get_metro_unique_artist_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_unique_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["topartists"]
 
 
-def get_metro_unique_track_chart(metro, country, start = None, end = None, page = None, limit = None):
+def get_metro_unique_track_chart(metro, country, page = None, limit = None, start = None, end = None):
     data = request_auto(_pkg)
     return data["toptracks"]
 
@@ -55,6 +54,6 @@ def get_top_artists(country, page = None, limit = None):
     return data["topartists"]
 
 
-def get_top_tracks(country, location = None, page = None, limit = None):
+def get_top_tracks(country, page = None, limit = None, location = None):
     data = request_auto(_pkg)
     return data["toptracks"]

@@ -34,7 +34,7 @@ def get_top_tracks(tag, page = None, limit = None):
     return data["toptracks"]
 
 
-def get_weekly_artist_chart(tag, from_ = None, to = None, limit = None):
+def get_weekly_artist_chart(tag, limit = None, from_ = None, to = None):
     data = request_auto(_pkg)
     return data["weeklyartistchart"]
 
