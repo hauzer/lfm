@@ -1,4 +1,5 @@
 import inspect, requests, hashlib, json
+from . import exceptions
 
 
 class App:
@@ -57,13 +58,13 @@ def request(pkg, method, params):
             except TypeError:
                 params[key] = str(params[key])
             
-    print(params)
-
-    params["api_sig"] = sign(params)
-
     resp = requests.post(api_root, params)
     data = json.loads(resp.text)
-    print(data)
+    
+    try:
+        raise exceptions.codes[data["error"]](data["message"])
+    except KeyError:
+        pass
 
     return data
 
