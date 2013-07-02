@@ -14,20 +14,26 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import inspect, requests, hashlib, json
+import requests
+import hashlib
+import json
+import inspect
+import sqlite3
+import time
 from . import exceptions
-
 
 class App:
     key     = None
     secret  = None
     sk      = None
+    db      = None
 
-    def __init__(self, key, secret):
+    def __init__(self, key, secret, db):
         global app
         
         self.key = key
         self.secret = secret
+        self.db = db
         
         if app is None:
             self.activate()
@@ -36,9 +42,14 @@ class App:
         global app
         app = self
 
+
 # The currently active application
 app = None
 api_root = "https://ws.audioscrobbler.com/2.0/"
+
+request_interval        = 300
+request_avg_interval    = 5
+max_requests            = request_interval / request_avg_interval
 
 
 def request(pkg, method, params):
@@ -52,6 +63,38 @@ def request(pkg, method, params):
     returns: A JSON response.
 
     """
+
+    try:
+        dbconn = sqlite3.connect(app.db)
+
+    except TypeError:
+        pass
+    
+    else:
+        dbcur = dbconn.cursor()
+        time_now = int(time.time())
+        can_request = True
+        
+        try:
+            dbcur.execute("create table timestamps (timestamps integer)")
+            
+        except sqlite3.OperationalError:
+            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - request_interval,))
+            dbcur.execute("select count(timestamps) from timestamps")
+
+            if dbcur.fetchone()[0] >= max_requests:
+                can_request = False
+        
+        if can_request:
+            dbcur.execute("insert into timestamps (timestamps) values (?)", (time_now,))
+        
+        dbconn.commit()
+        dbcur.close()
+        dbconn.close()
+        
+        if not can_request:
+            raise exceptions.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
+        
 
     params.update({"api_key": app.key,
                    "method": pkg + "." + method,
