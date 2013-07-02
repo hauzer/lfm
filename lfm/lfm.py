@@ -8,15 +8,20 @@ class App:
     sk      = None
 
     def __init__(self, key, secret):
+        global app
+        
         self.key = key
         self.secret = secret
+        
+        if app is None:
+            self.activate()
 
     def activate(self):
         global app
         app = self
 
 # The currently active application
-app = App("", "")
+app = None
 api_root = "https://ws.audioscrobbler.com/2.0/"
 
 
