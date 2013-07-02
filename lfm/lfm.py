@@ -60,6 +60,8 @@ def request(pkg, method, params):
             except TypeError:
                 params[key] = str(params[key])
             
+    params["api_sig"] = sign(params)
+            
     resp = requests.post(api_root, params)
     data = json.loads(resp.text)
     
