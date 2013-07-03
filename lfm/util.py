@@ -34,8 +34,8 @@ def to_arrays(xs, keys):
     return arrays
 
 
-def class_to_arrays(klas, i = 0):
-    attrs = [(key, value) for key, value in inspect.getmembers(klas)
+def class_to_arrays(cls, i = 0):
+    attrs = [(key, value) for key, value in inspect.getmembers(cls)
                     if not callable(value) and not(key.startswith("__") and key.endswith("__"))]
     
     arrays = {}
@@ -44,9 +44,9 @@ def class_to_arrays(klas, i = 0):
 
     return arrays
 
-def classes_to_arrays(klasses):
+def classes_to_arrays(classes):
     arrays = {}
-    for i, klas in enumerate(klasses):
-        arrays.update(class_to_arrays(klas, i))
+    for i, cls in enumerate(classes):
+        arrays.update(class_to_arrays(cls, i))
 
     return arrays
