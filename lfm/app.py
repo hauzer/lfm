@@ -86,7 +86,7 @@ class App:
             dbcur.execute("create table timestamps (timestamps integer)")
             
         except sqlite3.OperationalError:
-            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - lfm.request_interval,))
+            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - lfm.requests_period,))
             dbcur.execute("select count(timestamps) from timestamps")
 
             if dbcur.fetchone()[0] >= lfm.max_requests:
