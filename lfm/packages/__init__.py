@@ -14,22 +14,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
-
-
-_pkg = "auth"
-
-
-def get_mobile_session(username, password):
-    data = request_auto(_pkg)
-    return data["session"]
-
-
-def get_session(token):
-    data = request_auto(_pkg)
-    return data["session"]
-
-
-def get_token():
-    data = request_auto(_pkg)
-    return data["token"]
+from lfm.packages.album         import Album
+from lfm.packages.artist        import Artist
+from lfm.packages.auth          import Auth
+from lfm.packages.chart         import Chart
+from lfm.packages.event         import Event
+from lfm.packages.geo           import Geo
+from lfm.packages.group         import Group
+from lfm.packages.library       import Library
+from lfm.packages.playlist      import Playlist
+from lfm.packages.radio         import Radio
+from lfm.packages.tag           import Tag
+from lfm.packages.tasteometer   import Tasteometer
+from lfm.packages.track         import Track
+from lfm.packages.user          import User
+from lfm.packages.venue         import Venue
