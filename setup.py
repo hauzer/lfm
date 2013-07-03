@@ -14,15 +14,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
-setup(name="lfm",
-      version="1.0",
-      description="A Last.fm API interface.",
-      long_description="", # FIX
-      author="hauzer",
-      author_email="hauzer@gmx.com",
-      url="https://bitbucket.org/hauzer/lfm/",
-      download_url="https://bitbucket.org/hauzer/lfm/downloads",
-      license="GPLv3",
-      packages=["lfm", "lfm.packages"])
+setup(name              = "lfm",
+      # version = "1.0",
+      packages          = find_packages(),
+      install_requires  = ["requests"],
+
+      author        = "hauzer",
+      author_email  = "hauzer@gmx.com",
+      description   = "A Last.fm API interface.",
+      # long_description = "",
+      license       = "GPLv3",
+      url           = "https://bitbucket.org/hauzer/lfm/",
+      download_url  = "https://bitbucket.org/hauzer/lfm/downloads",
+      )
