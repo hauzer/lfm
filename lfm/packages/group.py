@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Никола Вукосављевић
+# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,35 +17,32 @@
 from lfm.package import Package
 
 
-__pkg = "group"
-
-
 class Group(Package):
     def get_hype(self, group):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklyartistchart"]
     
     
     def get_members(self, group, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["members"]
     
     
     def get_weekly_album_chart(self, group, from_ = None, to = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklyalbumchart"]
     
     
     def get_weekly_artist_chart(self, group, from_ = None, to = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklyartistchart"]
     
     
     def get_weekly_chart_list(self, group):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklychartlist"]
     
     
     def get_weekly_track_chart(self, group, from_ = None, to = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklytrackchart"]

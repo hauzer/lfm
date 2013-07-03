@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Никола Вукосављевић
+# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,14 +17,11 @@
 from lfm.package import Package
 
 
-__pkg = "playlist"
-
-
 class Playlist(Package):
     def add_track(self, playlistid, artist, track):
-        self.app.request_auto(__pkg)
+        self.app.request_auto()
     
     
     def create(self, title = None, description = None):
-        self.app.request_auto(__pkg)
+        self.app.request_auto()
     
