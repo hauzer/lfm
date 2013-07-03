@@ -14,88 +14,89 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "artist"
+__pkg = "artist"
 
 
-def add_tags(artist, tags):
-    request_auto(_pkg)
-
-
-def get_corrections(artist):
-    data = request_auto(_pkg)
-    return data["corrections"]
-
-
-def get_events(artist = None, page = None, limit = None, autocorrect = None, festivalsonly = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_info(artist = None, username = None, autocorrect = None, lang = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["artist"]
-
-
-def get_past_events(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_podcast(artist = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["rss"]
-
-
-def get_shouts(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["shouts"]
-
-
-def get_similar(artist = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["similarartists"]
-
-
-def get_tags(artist = None, user = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["tags"]
-
-
-def get_top_albums(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["topalbums"]
-
-
-def get_top_fans(artist = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["topfans"]
-
-
-def get_top_tags(artist = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["toptags"]
-
-
-def get_top_tracks(artist = None, page = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def remove_tag(artist, tag):
-    request_auto(_pkg)
-
-
-def search(artist, page, limit):
-    data = request_auto(_pkg)
-    return data["results"]
-
-
-def share(artist, recipient, message = None, public = None):
-    request_auto(_pkg)
-
-
-def shout(artist, message):
-    request_auto(_pkg)
+class Artist(Package):
+    def add_tags(self, artist, tags):
+        self.app.request_auto(__pkg)
+    
+    
+    def get_corrections(self, artist):
+        data = self.app.request_auto(__pkg)
+        return data["corrections"]
+    
+    
+    def get_events(self, artist = None, page = None, limit = None, autocorrect = None, festivalsonly = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_info(self, artist = None, username = None, autocorrect = None, lang = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["artist"]
+    
+    
+    def get_past_events(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_podcast(self, artist = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["rss"]
+    
+    
+    def get_shouts(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["shouts"]
+    
+    
+    def get_similar(self, artist = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["similarartists"]
+    
+    
+    def get_tags(self, artist = None, user = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["tags"]
+    
+    
+    def get_top_albums(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["topalbums"]
+    
+    
+    def get_top_fans(self, artist = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["topfans"]
+    
+    
+    def get_top_tags(self, artist = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptags"]
+    
+    
+    def get_top_tracks(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def remove_tag(self, artist, tag):
+        self.app.request_auto(__pkg)
+    
+    
+    def search(self, artist, page, limit):
+        data = self.app.request_auto(__pkg)
+        return data["results"]
+    
+    
+    def share(self, artist, recipient, message = None, public = None):
+        self.app.request_auto(__pkg)
+    
+    
+    def shout(self, artist, message):
+        self.app.request_auto(__pkg)

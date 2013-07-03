@@ -14,62 +14,63 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "geo"
+__pkg = "geo"
 
 
-def get_events(tag = None, page = None, limit = None, long = None, lat = None, location = None, distance = None, festivalsonly = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_metro_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_metro_hype_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_metro_hype_track_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def get_metro_track_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def get_metro_unique_artist_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_metro_unique_track_chart(metro, country, page = None, limit = None, start = None, end = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def get_metro_weekly_chart_list(metro):
-    data = request_auto(_pkg)
-    return data["weeklychartlist"]
-
-
-def get_metros(country = None):
-    data = request_auto(_pkg)
-    return data["metros"]
-
-
-def get_top_artists(country, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_top_tracks(country, page = None, limit = None, location = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
+class Geo(Package):
+    def get_events(self, tag = None, page = None, limit = None, long = None, lat = None, location = None, distance = None, festivalsonly = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_metro_artist_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_metro_hype_artist_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_metro_hype_track_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def get_metro_track_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def get_metro_unique_artist_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_metro_unique_track_chart(self, metro, country, page = None, limit = None, start = None, end = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def get_metro_weekly_chart_list(self, metro):
+        data = self.app.request_auto(__pkg)
+        return data["weeklychartlist"]
+    
+    
+    def get_metros(self, country = None):
+        data = self.app.request_auto(__pkg)
+        return data["metros"]
+    
+    
+    def get_top_artists(self, country, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_top_tracks(self, country, page = None, limit = None, location = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]

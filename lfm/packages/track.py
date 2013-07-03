@@ -14,7 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto, classes_to_arrays
+from lfm.package import Package
+from lfm.util import classes_to_arrays
 
 
 class Scrobble:
@@ -45,97 +46,98 @@ class Scrobble:
         self.chosenbyuser   = chosenbyuser
 
 
-_pkg = "track"
+__pkg = "track"
 
 
-def add_tags(artist, track, tags):
-    request_auto(_pkg)
-
-
-def ban(artist, track):
-    request_auto(_pkg)
-
-
-def get_buy_links(country, artist = None, track = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["affiliations"]
-
-
-def get_corrections(artist, track):
-    data = request_auto(_pkg)
-    return data["corrections"]
-
-
-def get_fingerprint_metadata(fingerprintid):
-    data = request_auto(_pkg)
-    return data["tracks"]
-
-
-def get_info(artist = None, track = None, username = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["track"]
-
-
-def get_shouts(artist = None, track = None, page = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["shouts"]
-
-
-def get_similar(artist = None, track = None, limit = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["similartracks"]
-
-
-def get_tags(artist = None, track = None, user = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["tags"]
-
-
-def get_top_fans(artist = None, track = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["topfans"]
-
-
-def get_top_tags(artist = None, track = None, autocorrect = None, mbid = None):
-    data = request_auto(_pkg)
-    return data["toptags"]
-
-
-def love(artist, track):
-    request_auto(_pkg)
-
-
-def remove_tag(artist, track, tag):
-    request_auto(_pkg)
-
-
-def scrobble(scrobbles):
-    params = classes_to_arrays(scrobbles)
-    scrobbles = None
-
-    data = request_auto(_pkg, params)
-
-    return data["scrobbles"]
-
-
-def search(track, artist = None, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["results"]
-
-
-def share(artist, track, recipient, message = None, public = None):
-    request_auto(_pkg)
-
-
-def unban(artist, track):
-    request_auto(_pkg)
-
-
-def unlove(artist, track):
-    request_auto(_pkg)
-
-
-def update_now_playing(artist, track, album = None, duration = None, tracknumber = None, albumartist = None, \
-                       mbid = None, context = None):
-    data = request_auto(_pkg)
-    return data["nowplaying"]
+class Track(Package):
+    def add_tags(self, artist, track, tags):
+        self.app.request_auto(__pkg)
+    
+    
+    def ban(self, artist, track):
+        self.app.request_auto(__pkg)
+    
+    
+    def get_buy_links(self, country, artist = None, track = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["affiliations"]
+    
+    
+    def get_corrections(self, artist, track):
+        data = self.app.request_auto(__pkg)
+        return data["corrections"]
+    
+    
+    def get_fingerprint_metadata(self, fingerprintid):
+        data = self.app.request_auto(__pkg)
+        return data["tracks"]
+    
+    
+    def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["track"]
+    
+    
+    def get_shouts(self, artist = None, track = None, page = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["shouts"]
+    
+    
+    def get_similar(self, artist = None, track = None, limit = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["similartracks"]
+    
+    
+    def get_tags(self, artist = None, track = None, user = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["tags"]
+    
+    
+    def get_top_fans(self, artist = None, track = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["topfans"]
+    
+    
+    def get_top_tags(self, artist = None, track = None, autocorrect = None, mbid = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptags"]
+    
+    
+    def love(self, artist, track):
+        self.app.request_auto(__pkg)
+    
+    
+    def remove_tag(self, artist, track, tag):
+        self.app.request_auto(__pkg)
+    
+    
+    def scrobble(self, scrobbles):
+        params = classes_to_arrays(scrobbles)
+        scrobbles = None
+    
+        data = self.app.request_auto(__pkg, params)
+    
+        return data["scrobbles"]
+    
+    
+    def search(self, track, artist = None, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["results"]
+    
+    
+    def share(self, artist, track, recipient, message = None, public = None):
+        self.app.request_auto(__pkg)
+    
+    
+    def unban(self, artist, track):
+        self.app.request_auto(__pkg)
+    
+    
+    def unlove(self, artist, track):
+        self.app.request_auto(__pkg)
+    
+    
+    def update_now_playing(self, artist, track, album = None, duration = None, tracknumber = None, albumartist = None, \
+                           mbid = None, context = None):
+        data = self.app.request_auto(__pkg)
+        return data["nowplaying"]

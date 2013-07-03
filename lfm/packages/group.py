@@ -14,37 +14,38 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "group"
+__pkg = "group"
 
 
-def get_hype(group):
-    data = request_auto(_pkg)
-    return data["weeklyartistchart"]
-
-
-def get_members(group, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["members"]
-
-
-def get_weekly_album_chart(group, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklyalbumchart"]
-
-
-def get_weekly_artist_chart(group, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklyartistchart"]
-
-
-def get_weekly_chart_list(group):
-    data = request_auto(_pkg)
-    return data["weeklychartlist"]
-
-
-def get_weekly_track_chart(group, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklytrackchart"]
+class Group(Package):
+    def get_hype(self, group):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyartistchart"]
+    
+    
+    def get_members(self, group, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["members"]
+    
+    
+    def get_weekly_album_chart(self, group, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyalbumchart"]
+    
+    
+    def get_weekly_artist_chart(self, group, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyartistchart"]
+    
+    
+    def get_weekly_chart_list(self, group):
+        data = self.app.request_auto(__pkg)
+        return data["weeklychartlist"]
+    
+    
+    def get_weekly_track_chart(self, group, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklytrackchart"]

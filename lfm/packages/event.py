@@ -14,34 +14,35 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "event"
+__pkg = "event"
 
 
-def attend(event, status):
-    request_auto(_pkg)
-
-
-def get_attendees(event, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["attendees"]
-
-
-def get_info(event):
-    data = request_auto(_pkg)
-    return data["event"]
-
-
-def get_shouts(event, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["shouts"]
-
-
-def share(event, recipient, message = None, public = None):
-    request_auto(_pkg)
-
-
-def shout(event, message):
-    request_auto(_pkg)
+class Event(Package):
+    def attend(self, event, status):
+        self.app.request_auto(__pkg)
+    
+    
+    def get_attendees(self, event, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["attendees"]
+    
+    
+    def get_info(self, event):
+        data = self.app.request_auto(__pkg)
+        return data["event"]
+    
+    
+    def get_shouts(self, event, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["shouts"]
+    
+    
+    def share(self, event, recipient, message = None, public = None):
+        self.app.request_auto(__pkg)
+    
+    
+    def shout(self, event, message):
+        self.app.request_auto(__pkg)
