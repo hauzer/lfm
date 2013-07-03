@@ -14,37 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "chart"
+__pkg = "auth"
 
 
-def get_hyped_artists(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["artists"]
-
-
-def get_hyped_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
-
-
-def get_loved_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
-
-
-def get_top_artists(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["artists"]
-
-
-def get_top_tags(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tags"]
-
-
-def get_top_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
+class Auth(Package):
+    def get_mobile_session(self, username, password):
+        data = self.app.request_auto(__pkg)
+        return data["session"]
+    
+    
+    def get_session(self, token):
+        data = self.app.request_auto(__pkg)
+        return data["session"]
+    
+    
+    def get_token(self, ):
+        data = self.app.request_auto(__pkg)
+        return data["token"]

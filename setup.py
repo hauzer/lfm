@@ -25,4 +25,4 @@ setup(name="lfm",
       url="https://bitbucket.org/hauzer/lfm/",
       download_url="https://bitbucket.org/hauzer/lfm/downloads",
       license="GPLv3",
-      packages=["lfm", "lfm.api"])
+      packages=["lfm", "lfm.packages"])

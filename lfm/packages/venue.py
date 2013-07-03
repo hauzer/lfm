@@ -14,22 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "venue"
+__pkg = "venue"
 
 
-def get_events(venue, festivalsonly = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_past_events(venue, page = None, limit = None, festivalsonly = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def search(venue, page = None, limit = None, country = None):
-    data = request_auto(_pkg)
-    return data["results"]
+class Venue(Package):
+    def get_events(self, venue, festivalsonly = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_past_events(self, venue, page = None, limit = None, festivalsonly = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def search(self, venue, page = None, limit = None, country = None):
+        data = self.app.request_auto(__pkg)
+        return data["results"]

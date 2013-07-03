@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .lfm import *
-from . import api
-from .api.track import Scrobble
+from lfm.app            import App
+from lfm                import exceptions
+from lfm.package        import Package
+from lfm.packages.track import Scrobble
