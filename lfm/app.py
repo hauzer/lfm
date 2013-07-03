@@ -21,6 +21,7 @@ import inspect
 import sqlite3
 import time
 from lfm import lfm
+from lfm.package import Package
 from lfm import exceptions as e
 from lfm import packages as pkg
 
@@ -204,19 +205,20 @@ class App:
         return data
 
 
-    def request_auto(self, pkg, special_params = None, method = None):
+    def request_auto(self, special_params = None, pkg = None, method = None):
         """
         An automated version of request(), designed to reduce repetitive code.
     
-        This function will generate the API method and API request parameters from its
-        calling function's signature. The caller's name, stripped of underscores,
-        is used as the API method. The caller's argument names are parameter keys,
-        and argument values are parameter values. Argument names are stripped of
-        trailing underscores, to permit use of keywords.
-        special_params can be used to override any parameter, and add or change any
-        number of additional ones.
+        This function will generate the API package, method and request parameters from its
+        calling function's signature. If the caller is in a class, [self] is automatically removed.
+        If the caller is in a class whose parent or ancestor is [lfm.package.Package], then the
+        class' name is used as the API package. The caller's name, stripped of underscores,
+        is used as the API method. The caller's argument names are parameter keys, and argument
+        values are parameter values. Argument names are stripped of trailing underscores,
+        to permit use of keywords, such as [from]. [special_params] can be used to override any
+        parameter, and add or change any number of additional ones.
     
-        pkg                  : The name of the package in which the method resides.
+        pkg            = None: The name of the package in which the method resides.
         special_params = None: Additional or modified parameters to be used.
         method         = None: The method's name.
     
@@ -230,12 +232,14 @@ class App:
             method = frame_record[3].replace("_", "")
     
         args, _, _, locals_ = inspect.getargvalues(frame_record[0])
-    
         params = dict([(arg, locals_[arg]) for arg in args])
-    
-        for key, value in params:
-            if value is self:
-                del params[key]
+        
+        for key, value in params.items():
+            if key == "self":
+                params[key] = None
+                
+                if isinstance(value, Package):
+                    pkg = value.__class__.__name__
     
         if(special_params is not None):
             params.update(special_params)

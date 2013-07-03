@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Никола Вукосављевић
+# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,32 +17,29 @@
 from lfm.package import Package
 
 
-__pkg = "event"
-
-
 class Event(Package):
     def attend(self, event, status):
-        self.app.request_auto(__pkg)
+        self.app.request_auto()
     
     
     def get_attendees(self, event, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["attendees"]
     
     
     def get_info(self, event):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["event"]
     
     
     def get_shouts(self, event, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["shouts"]
     
     
     def share(self, event, recipient, message = None, public = None):
-        self.app.request_auto(__pkg)
+        self.app.request_auto()
     
     
     def shout(self, event, message):
-        self.app.request_auto(__pkg)
+        self.app.request_auto()

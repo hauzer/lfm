@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Никола Вукосављевић
+# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,50 +17,47 @@
 from lfm.package import Package
 
 
-__pkg = "tag"
-
-
 class Tag(Package):
     def get_info(self, artist = None, mbid = None, lang = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["tag"]
     
     
     def get_similar(self, tag):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["similartags"]
     
     
     def get_top_albums(self, tag, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["topalbums"]
     
     
     def get_top_artists(self, tag, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["topartists"]
     
     
     def get_top_tags(self, ):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["toptags"]
     
     
     def get_top_tracks(self, tag, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["toptracks"]
     
     
     def get_weekly_artist_chart(self, tag, limit = None, from_ = None, to = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklyartistchart"]
     
     
     def get_weekly_chart_list(self, tag):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["weeklychartlist"]
     
     
     def get_search(self, tag, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["results"]

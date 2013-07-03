@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Никола Вукосављевић
+# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,35 +17,32 @@
 from lfm.package import Package
 
 
-__pkg = "chart"
-
-
 class Chart(Package):
     def get_hyped_artists(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["artists"]
 
 
     def get_hyped_tracks(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["tracks"]
 
 
     def get_loved_tracks(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["tracks"]
 
 
     def get_top_artists(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["artists"]
 
 
     def get_top_tags(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["tags"]
 
 
     def get_top_tracks(self, page = None, limit = None):
-        data = self.app.request_auto(__pkg)
+        data = self.app.request_auto()
         return data["tracks"]
