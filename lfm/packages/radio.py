@@ -14,22 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "radio"
+__pkg = "radio"
 
 
-def get_playlist(bitrate = None, rtp = None, discovery = None, speed_multiplier = None, buylinks = None):
-    data = request_auto(_pkg)
-    return data["playlist"]
-
-
-def search(name):
-    data = request_auto(_pkg)
-    return data["stations"]
-
-
-def tune(station, lang = None):
-    data = request_auto(_pkg)
-    return data["station"]
+class Radio(Package):
+    def get_playlist(self, bitrate = None, rtp = None, discovery = None, speed_multiplier = None, buylinks = None):
+        data = self.app.request_auto(__pkg)
+        return data["playlist"]
+    
+    
+    def search(self, name):
+        data = self.app.request_auto(__pkg)
+        return data["stations"]
+    
+    
+    def tune(self, station, lang = None):
+        data = self.app.request_auto(__pkg)
+        return data["station"]

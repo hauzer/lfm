@@ -14,37 +14,38 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "chart"
+__pkg = "chart"
 
 
-def get_hyped_artists(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["artists"]
+class Chart(Package):
+    def get_hyped_artists(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["artists"]
 
 
-def get_hyped_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
+    def get_hyped_tracks(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["tracks"]
 
 
-def get_loved_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
+    def get_loved_tracks(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["tracks"]
 
 
-def get_top_artists(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["artists"]
+    def get_top_artists(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["artists"]
 
 
-def get_top_tags(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tags"]
+    def get_top_tags(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["tags"]
 
 
-def get_top_tracks(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["tracks"]
+    def get_top_tracks(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["tracks"]

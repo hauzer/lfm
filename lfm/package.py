@@ -14,13 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.package import Package
-
-
-__pkg = "tasteometer"
-
-
-class Tasteometer(Package):
-    def compare(self, type1, value1, type2, value2, limit = None):
-        data = self.app.request_auto(__pkg)
-        return data["comparison"]
+class Package:
+    app = None
+    
+    def __init__(self, app):
+        self.app = app
+        

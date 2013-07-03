@@ -14,131 +14,132 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "user"
+__pkg = "user"
 
 
-def get_artist_tracks(user, artist, page = None, starttimestamp = None, endtimestamp = None):
-    data = request_auto(_pkg)
-    return data["artisttracks"]
-
-
-def get_banned_tracks(user, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["bannedtracks"]
-
-
-def get_events(user, page = None, limit = None, festivalsonly = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_friends(user, page = None, limit = None, recenttracks = None):
-    data = request_auto(_pkg)
-    return data["friends"]
-
-
-def get_info(user = None):
-    data = request_auto(_pkg)
-    return data["user"]
-
-
-def get_loved_tracks(user, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["lovedtracks"]
-
-
-def get_neighbours(user, limit = None):
-    data = request_auto(_pkg)
-    return data["neighbours"]
-
-
-def get_new_releases(user, userecs = None):
-    data = request_auto(_pkg)
-    return data["albums"]
-
-
-def get_past_events(user, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_personal_tags(user, tag, taggingtype, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["taggings"]
-
-
-def get_playlists(user):
-    data = request_auto(_pkg)
-    return data["playlists"]
-
-
-def get_recent_stations(user, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["recentstations"]
-
-
-def get_recent_tracks(user, extended = None, page = None, limit = None, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["recenttracks"]
-
-
-def get_recommended_artists(page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["recommendations"]
-
-
-def get_recommended_events(page = None, limit = None, latitude = None, longitude = None, festivalsonly = None):
-    data = request_auto(_pkg)
-    return data["events"]
-
-
-def get_shouts(user, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["shouts"]
-
-
-def get_top_albums(user, period = None, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["topalbums"]
-
-
-def get_top_artists(user, period = None, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_top_tags(user, limit = None):
-    data = request_auto(_pkg)
-    return data["toptags"]
-
-
-def get_top_tracks(user, period = None, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def get_weekly_album_chart(user, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklyalbumchart"]
-
-
-def get_weekly_artist_chart(user, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklyartistchart"]
-
-
-def get_weekly_chart_list(user):
-    data = request_auto(_pkg)
-    return data["weeklychartlist"]
-
-
-def get_weekly_track_chart(user, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklytrackchart"]
-
-
-def shout(user, message):
-    request_auto(_pkg)
+class User(Package):
+    def get_artist_tracks(self, user, artist, page = None, starttimestamp = None, endtimestamp = None):
+        data = self.app.request_auto(__pkg)
+        return data["artisttracks"]
+    
+    
+    def get_banned_tracks(self, user, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["bannedtracks"]
+    
+    
+    def get_events(self, user, page = None, limit = None, festivalsonly = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_friends(self, user, page = None, limit = None, recenttracks = None):
+        data = self.app.request_auto(__pkg)
+        return data["friends"]
+    
+    
+    def get_info(self, user = None):
+        data = self.app.request_auto(__pkg)
+        return data["user"]
+    
+    
+    def get_loved_tracks(self, user, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["lovedtracks"]
+    
+    
+    def get_neighbours(self, user, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["neighbours"]
+    
+    
+    def get_new_releases(self, user, userecs = None):
+        data = self.app.request_auto(__pkg)
+        return data["albums"]
+    
+    
+    def get_past_events(self, user, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_personal_tags(self, user, tag, taggingtype, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["taggings"]
+    
+    
+    def get_playlists(self, user):
+        data = self.app.request_auto(__pkg)
+        return data["playlists"]
+    
+    
+    def get_recent_stations(self, user, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["recentstations"]
+    
+    
+    def get_recent_tracks(self, user, extended = None, page = None, limit = None, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["recenttracks"]
+    
+    
+    def get_recommended_artists(self, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["recommendations"]
+    
+    
+    def get_recommended_events(self, page = None, limit = None, latitude = None, longitude = None, festivalsonly = None):
+        data = self.app.request_auto(__pkg)
+        return data["events"]
+    
+    
+    def get_shouts(self, user, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["shouts"]
+    
+    
+    def get_top_albums(self, user, period = None, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["topalbums"]
+    
+    
+    def get_top_artists(self, user, period = None, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_top_tags(self, user, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptags"]
+    
+    
+    def get_top_tracks(self, user, period = None, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def get_weekly_album_chart(self, user, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyalbumchart"]
+    
+    
+    def get_weekly_artist_chart(self, user, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyartistchart"]
+    
+    
+    def get_weekly_chart_list(self, user):
+        data = self.app.request_auto(__pkg)
+        return data["weeklychartlist"]
+    
+    
+    def get_weekly_track_chart(self, user, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklytrackchart"]
+    
+    
+    def shout(self, user, message):
+        self.app.request_auto(__pkg)

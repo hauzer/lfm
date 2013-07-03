@@ -14,22 +14,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "auth"
+__pkg = "auth"
 
 
-def get_mobile_session(username, password):
-    data = request_auto(_pkg)
-    return data["session"]
-
-
-def get_session(token):
-    data = request_auto(_pkg)
-    return data["session"]
-
-
-def get_token():
-    data = request_auto(_pkg)
-    return data["token"]
+class Auth(Package):
+    def get_mobile_session(self, username, password):
+        data = self.app.request_auto(__pkg)
+        return data["session"]
+    
+    
+    def get_session(self, token):
+        data = self.app.request_auto(__pkg)
+        return data["session"]
+    
+    
+    def get_token(self, ):
+        data = self.app.request_auto(__pkg)
+        return data["token"]

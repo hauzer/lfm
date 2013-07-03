@@ -14,52 +14,53 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.lfm import request_auto
+from lfm.package import Package
 
 
-_pkg = "tag"
+__pkg = "tag"
 
 
-def get_info(artist = None, mbid = None, lang = None):
-    data = request_auto(_pkg)
-    return data["tag"]
-
-
-def get_similar(tag):
-    data = request_auto(_pkg)
-    return data["similartags"]
-
-
-def get_top_albums(tag, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["topalbums"]
-
-
-def get_top_artists(tag, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["topartists"]
-
-
-def get_top_tags():
-    data = request_auto(_pkg)
-    return data["toptags"]
-
-
-def get_top_tracks(tag, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["toptracks"]
-
-
-def get_weekly_artist_chart(tag, limit = None, from_ = None, to = None):
-    data = request_auto(_pkg)
-    return data["weeklyartistchart"]
-
-
-def get_weekly_chart_list(tag):
-    data = request_auto(_pkg)
-    return data["weeklychartlist"]
-
-
-def get_search(tag, page = None, limit = None):
-    data = request_auto(_pkg)
-    return data["results"]
+class Tag(Package):
+    def get_info(self, artist = None, mbid = None, lang = None):
+        data = self.app.request_auto(__pkg)
+        return data["tag"]
+    
+    
+    def get_similar(self, tag):
+        data = self.app.request_auto(__pkg)
+        return data["similartags"]
+    
+    
+    def get_top_albums(self, tag, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["topalbums"]
+    
+    
+    def get_top_artists(self, tag, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["topartists"]
+    
+    
+    def get_top_tags(self, ):
+        data = self.app.request_auto(__pkg)
+        return data["toptags"]
+    
+    
+    def get_top_tracks(self, tag, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["toptracks"]
+    
+    
+    def get_weekly_artist_chart(self, tag, limit = None, from_ = None, to = None):
+        data = self.app.request_auto(__pkg)
+        return data["weeklyartistchart"]
+    
+    
+    def get_weekly_chart_list(self, tag):
+        data = self.app.request_auto(__pkg)
+        return data["weeklychartlist"]
+    
+    
+    def get_search(self, tag, page = None, limit = None):
+        data = self.app.request_auto(__pkg)
+        return data["results"]
