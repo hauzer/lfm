@@ -18,34 +18,6 @@ from lfm.package import Package
 from lfm.util import classes_to_arrays
 
 
-class Scrobble:
-    artist          = None
-    track           = None
-    timestamp       = None
-    album           = None
-    duration        = None
-    mbid            = None
-    tracknumber     = None
-    albumartist     = None
-    streamid        = None
-    chosenbyuser    = None
-    context         = None
-
-    def __init__(self, artist, track, timestamp, album = None, duration = None, mbid = None, \
-                 tracknumber = None, albumartist = None, streamid = None, chosenbyuser = None, \
-                 context = None):
-        self.artist         = artist
-        self.track          = track
-        self.timestamp      = timestamp
-        self.album          = album
-        self.duration       = duration
-        self.mbid           = mbid
-        self.tracknumber    = tracknumber
-        self.albumartist    = albumartist
-        self.streamid       = streamid
-        self.chosenbyuser   = chosenbyuser
-
-
 class Track(Package):
     def add_tags(self, artist, track, tags):
         self.app.request_auto()
