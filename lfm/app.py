@@ -44,8 +44,8 @@ class App:
     
     key     = None
     secret  = None
-    sk      = None
     db      = None
+    sk      = None
 
 
     def __init__(self, key, secret, db = None):
@@ -247,13 +247,4 @@ class App:
         params = dict([(key.rstrip('_'), params[key]) for key in params])
     
         return self.request(pkg, method, params)
-
-
-    def get_token_url(self, token):
-        """
-        Returns the authentication page of a token.
-    
-        """
-    
-        return "http://www.last.fm/api/auth/?api_key=" + self.key + "&token=" + token
     
