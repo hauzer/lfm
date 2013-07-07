@@ -1,5 +1,5 @@
 # A Last.fm API interface.
-# Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
+# Copyright (C) 2013  Никола Вукосављевић
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,23 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from lfm.package import Package
-from lfm.token import Token
-
-
-class Auth(Package):
-    def get_mobile_session(self, username, password):
-        data = self.app.request_auto()
-        return data["session"]
+class Token:
+    str = None
+    url = None
     
     
-    def get_session(self, token):
-        data = self.app.request_auto()
-        return data["session"]
+    def __str__(self):
+        return self.str
     
     
-    def get_token(self):
-        data = self.app.request_auto()
-        token = Token(self.app, data["token"])
-        
-        return token
+    def __init__(self, app, token):
+        self.str = token
+        self.url = "http://www.last.fm/api/auth/?api_key=" + app.key + "&token=" + token
