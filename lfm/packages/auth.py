@@ -1,3 +1,4 @@
+#
 # A Last.fm API interface.
 # Copyright (C) 2013  Ð�Ð¸ÐºÐ¾Ð»Ð° Ð’ÑƒÐºÐ¾Ñ�Ð°Ð²Ñ™ÐµÐ²Ð¸Ñ›
 #
@@ -13,6 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
 
 from lfm.package import Package
 from lfm.token import Token
