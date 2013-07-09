@@ -1,3 +1,4 @@
+#
 # A Last.fm API interface.
 # Copyright (C) 2013  Никола Вукосављевић
 #
@@ -13,17 +14,20 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
-import requests
+
 import hashlib
-import json
 import inspect
-import sqlite3
-import time
+import json
 from lfm import lfm
-from lfm.package import Package
 from lfm import exceptions as e
 from lfm import packages as pkg
+from lfm.package import Package
+import requests
+import sqlite3
+import time
+
 
 class App:
     album       = None

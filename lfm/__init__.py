@@ -1,3 +1,4 @@
+#
 # A Last.fm API interface.
 # Copyright (C) 2013  Никола Вукосављевић
 #
@@ -13,8 +14,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
-from lfm.app        import App
+
 from lfm            import exceptions
+from lfm.app        import App
 from lfm.package    import Package
 from lfm.scrobble   import Scrobble
