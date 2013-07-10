@@ -127,12 +127,14 @@ class App:
 
     def sign_request(self, params):
         """
-        Generates an API signature, which is needed for authorized API requests.
-    
-        params: A dictionary of all parameters intended to be sent with an API request.
-    
-        returns: An API signature.
-    
+        Generates an API request signature, which is needed for authorized API requests.
+        
+        *params*
+            A dictionary of all parameters intended to be sent with the API request.
+        
+        *returns*
+            The API signature.
+        
         """
     
         # Parameters are alphabetically sorted by their key, and then concatenated
@@ -150,7 +152,7 @@ class App:
     
         concat_params += self.secret
     
-        sig = hashlib.md5(concat_params.encode('utf-8')).hexdigest()
+        sig = hashlib.md5(concat_params.encode("utf-8")).hexdigest()
         
         return sig
 
@@ -158,13 +160,19 @@ class App:
     def request(self, pkg, method, params):
         """
         Makes an API request.
-    
-        pkg   : The name of the package in which the method resides.
-        method: The method's name.
-        params: A dictionary of parameters to be sent.
-    
-        returns: A JSON response.
-    
+        
+        *pkg*
+            The name of the package in which the method resides.
+        
+        *method*
+            The name of the method.
+        
+        *params*
+            A dictionary of parameters to be sent.
+        
+        *returns*
+            A JSON response.
+        
         """
     
         if self.can_request():
@@ -211,32 +219,35 @@ class App:
 
     def request_auto(self, special_params = None, pkg = None, method = None):
         """
-        An automated version of request(), designed to reduce repetitive code.
-    
-        This function will generate the API package, method and request parameters from its
-        calling function's signature. If the caller is in a class, [self] is automatically removed.
-        If the caller is in a class whose parent or ancestor is [lfm.package.Package], then the
-        class' name is used as the API package. The caller's name, stripped of underscores,
-        is used as the API method. The caller's argument names are parameter keys, and argument
-        values are parameter values. Argument names are stripped of trailing underscores,
-        to permit use of keywords, such as [from]. [special_params] can be used to override any
+        This is an automated version of :py:func:`request`, designed to reduce repetitive code.
+        
+        This function will generate the package, method and request parameters from its
+        calling function's signature. If the caller is in a class, *self* is ignored.
+        If the caller is in a class whose parent or ancestor is :py:class:`lfm.package.Package`, then the
+        class' name is used as the name of the package. The caller function's name, stripped of underscores,
+        is used as the name of the method. The caller function's argument names are parameter keys,
+        and argument values are parameter values. Argument names are stripped of trailing underscores,
+        to permit use of keywords, such as *from*. *special_params* can be used to override any
         parameter, and add or change any number of additional ones.
-    
-        pkg            = None: The name of the package in which the method resides.
-        special_params = None: Additional or modified parameters to be used.
-        method         = None: The method's name.
-    
-        returns: A JSON response.
-    
+        
+        :param special_params: additional or modified parameters
+        :type special_params: dictionary
+        :param pkg: the name of the package in which the method resides
+        :type pkg: string
+        :param method: the name of the method
+        :type method: string
+        :returns: the response
+        :rtype: json object
+        
         """
-    
+        
         frame_record = inspect.stack()[1]
     
         if(method is None):
             method = frame_record[3].replace("_", "")
     
         args, _, _, locals_ = inspect.getargvalues(frame_record[0])
-        params = dict([(arg, locals_[arg]) for arg in args])
+        params = dict((arg, locals_[arg]) for arg in args)
         
         for key, value in params.items():
             if key == "self":
@@ -248,7 +259,7 @@ class App:
         if(special_params is not None):
             params.update(special_params)
     
-        params = dict([(key.rstrip('_'), params[key]) for key in params])
+        params = dict((key.rstrip('_'), params[key]) for key in params)
     
         return self.request(pkg, method, params)
     

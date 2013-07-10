@@ -2,5 +2,6 @@ syntax: glob
 MANIFEST
 .*
 dist
-lfm.egg-info
 __pycache__
+_*
+*.egg-info
