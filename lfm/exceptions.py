@@ -17,6 +17,13 @@
 #
 
 
+"""
+Holds all of the exceptions related to Last.fm that the library can raise
+through a :py:func:`~lfm.app.App.request`.
+
+"""
+
+
 #
 # Errors as shown on Last.fm API pages.
 #
@@ -48,6 +55,12 @@
 
 
 class RequestError(Exception):
+    """
+    The base exception all other exceptions are based on.
+    It's never raised.
+    
+    """
+    
     pass
 
 class InvalidService(RequestError):
@@ -120,6 +133,11 @@ class GeoRestricted(RequestError):
     pass
 
 class RateLimitExceeded(RequestError):
+    """
+    PLACEHOLDER
+    
+    """
+    
     pass
 
 

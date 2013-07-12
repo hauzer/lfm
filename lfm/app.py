@@ -16,6 +16,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+"""
+Holds :py:class:`App`.
+
+"""
 
 import hashlib
 import inspect
@@ -30,6 +34,13 @@ import time
 
 
 class App:
+    """
+    Represents a single Last.fm application.
+    
+    A Last.fm application is associated with an `API account <http://www.last.fm/api/account/create>`_.
+    
+    """
+    
     album       = None
     artist      = None
     auth        = None
@@ -53,6 +64,32 @@ class App:
 
 
     def __init__(self, key, secret, db = None):
+        """
+        :param key:
+            The key of an API account.
+            
+        :type key:
+            string
+        
+        :param secret:
+            The secret of an API account.
+        
+        :type secret:
+            string
+        
+        :param db:
+            The name of the file which will hold a :mod:`sqlite3 <python:sqlite3>` database
+            tied to this application. The purpose of the database is to keep track of the
+            number of requests made, so the application can comply to the
+            point 4.4 of  `Last.fm's API Terms of Service <http://www.last.fm/api/tos>`_.
+            If the parameter is *None*, the library will not limit the number of requests
+            in any way, but the Last.fm servers probably will.
+            
+        :type db:
+            string
+        
+        """
+        
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -72,6 +109,176 @@ class App:
         self.key = key
         self.secret = secret
         self.db = db
+
+
+    def request(self, pkg, method, params):
+        """
+        Makes an API request.
+        
+        :param pkg:
+            The name of the package in which the method resides.
+            
+        :type pkg:
+            string
+            
+        :param method:
+            The name of the method.
+            
+        :type method:
+            string
+            
+        :param params:
+            Parameters to be sent.
+            
+        :type params:
+            dict
+            
+        :returns:
+            The response.
+            
+        :rtype:
+            :mod:`json object <python:json>`
+        
+        """
+    
+        if self.can_request():
+            self.log_request()
+        else:
+            raise e.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
+    
+    
+        params.update({"api_key": self.key,
+                       "method": pkg + "." + method,
+                       "sk": self.sk,
+                       "format": "json"})
+    
+        # Remove keys with a value of None.
+        params = dict((key, params[key]) for key in params if params[key] is not None)
+        
+        # Convert all objects to strings, as expected by the API
+        for key in params.copy():
+            if isinstance(params[key], bool):
+                if params[key]:
+                    params[key] = "1"
+                else:
+                    params[key] = "0"
+    
+            elif not isinstance(params[key], str):
+                try:
+                    params[key] = ",".join(params[key])
+    
+                except TypeError:
+                    params[key] = str(params[key])
+                
+        params["api_sig"] = self.sign_request(params)
+                
+        resp = requests.post(lfm.api_root, params)
+        data = json.loads(resp.text)
+        
+        try:
+            raise e.codes[data["error"]](data["message"])
+        except KeyError:
+            pass
+    
+        return data
+
+
+    def request_auto(self, special_params = None, pkg = None, method = None):
+        """
+        An automated version of :py:func:`request`, designed to reduce repetitive code.
+        
+        It will generate the package, method and request parameters from its
+        calling function's signature. If the caller is in a class, *self* is ignored.
+        If the caller is in a class whose parent or ancestor is :py:class:`lfm.package.Package`, then the
+        class' name is used as the name of the package. The caller's name, stripped of underscores,
+        is used as the name of the method. Argument names are used as parameter keys, and argument
+        values as parameter values. Argument names are stripped of trailing underscores,
+        to permit use of keywords as parameter keys.
+        
+        :param special_params:
+            Additional parameters merged with automatically generated ones.
+            
+        :type special_params:
+            :class:`dict <python:dict>`
+            
+        :param pkg:
+            The name of the package in which the method resides.
+            
+        :type pkg:
+            :mod:`string <python:string>`
+            
+        :param method:
+            The name of the method.
+            
+        :type method:
+            :mod:`string <python:string>`
+            
+        :returns:
+            The response.
+            
+        :rtype: :mod:`json object <python:json>`
+        
+        """
+        
+        frame_record = inspect.stack()[1]
+    
+        if(method is None):
+            method = frame_record[3].replace("_", "")
+    
+        args, _, _, locals_ = inspect.getargvalues(frame_record[0])
+        params = dict((arg, locals_[arg]) for arg in args)
+        
+        for key, value in params.items():
+            if key == "self":
+                params[key] = None
+                
+                if isinstance(value, Package):
+                    pkg = value.__class__.__name__
+    
+        if(special_params is not None):
+            params.update(special_params)
+    
+        params = dict((key.rstrip('_'), params[key]) for key in params)
+    
+        return self.request(pkg, method, params)
+    
+
+    def sign_request(self, params):
+        """
+        Generates an API signature, which is needed for authorized API requests.
+        
+        :param params:
+            All parameters intended to be sent with the request.
+            
+        :type params:
+            dict
+            
+        :returns:
+            The signature.
+            
+        :rtype:
+            :mod:`string <python:string>`
+        
+        """
+    
+        # Parameters are alphabetically sorted by their key, and then concatenated
+        # in a keyvalue manner. The application's secret is appended afterwards,
+        # the whole thing is UTF-8 encoded, and then md5() hashed, hex digest of it
+        # being the signature. Some parameters mustn't be included in the calculation.
+    
+        # Keys excluded from the calculation
+        forbid_keys = ["format"]
+    
+        concat_params = ""
+        for key in sorted(list(params)):
+            if key not in forbid_keys:
+                concat_params += key + params[key]
+    
+        concat_params += self.secret
+    
+        sig = hashlib.md5(concat_params.encode("utf-8")).hexdigest()
+        
+        return sig
 
 
     def can_request(self):
@@ -123,143 +330,4 @@ class App:
         dbconn.commit()
         dbcur.close()
         dbconn.close()
-
-
-    def sign_request(self, params):
-        """
-        Generates an API request signature, which is needed for authorized API requests.
-        
-        *params*
-            A dictionary of all parameters intended to be sent with the API request.
-        
-        *returns*
-            The API signature.
-        
-        """
-    
-        # Parameters are alphabetically sorted by their key, and then concatenated
-        # in a keyvalue manner. The application's secret is appended afterwards,
-        # the whole thing is UTF-8 encoded, and then md5() hashed, hex digest of it
-        # being the signature. Some parameters mustn't be included in the calculation.
-    
-        # Keys excluded from the calculation
-        forbid_keys = ["format"]
-    
-        concat_params = ""
-        for key in sorted(list(params)):
-            if key not in forbid_keys:
-                concat_params += key + params[key]
-    
-        concat_params += self.secret
-    
-        sig = hashlib.md5(concat_params.encode("utf-8")).hexdigest()
-        
-        return sig
-
-
-    def request(self, pkg, method, params):
-        """
-        Makes an API request.
-        
-        *pkg*
-            The name of the package in which the method resides.
-        
-        *method*
-            The name of the method.
-        
-        *params*
-            A dictionary of parameters to be sent.
-        
-        *returns*
-            A JSON response.
-        
-        """
-    
-        if self.can_request():
-            self.log_request()
-        else:
-            raise e.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
-    
-    
-        params.update({"api_key": self.key,
-                       "method": pkg + "." + method,
-                       "sk": self.sk,
-                       "format": "json"})
-    
-        # Remove keys with a value of None.
-        params = dict((key, params[key]) for key in params if params[key] is not None)
-        
-        # Convert all objects to strings, as expected by the API
-        for key in params.copy():
-            if isinstance(params[key], bool):
-                if params[key]:
-                    params[key] = "1"
-                else:
-                    params[key] = "0"
-    
-            elif not isinstance(params[key], str):
-                try:
-                    params[key] = ",".join(params[key])
-    
-                except TypeError:
-                    params[key] = str(params[key])
-                
-        params["api_sig"] = self.sign_request(params)
-                
-        resp = requests.post(lfm.api_root, params)
-        data = json.loads(resp.text)
-        
-        try:
-            raise e.codes[data["error"]](data["message"])
-        except KeyError:
-            pass
-    
-        return data
-
-
-    def request_auto(self, special_params = None, pkg = None, method = None):
-        """
-        This is an automated version of :py:func:`request`, designed to reduce repetitive code.
-        
-        This function will generate the package, method and request parameters from its
-        calling function's signature. If the caller is in a class, *self* is ignored.
-        If the caller is in a class whose parent or ancestor is :py:class:`lfm.package.Package`, then the
-        class' name is used as the name of the package. The caller function's name, stripped of underscores,
-        is used as the name of the method. The caller function's argument names are parameter keys,
-        and argument values are parameter values. Argument names are stripped of trailing underscores,
-        to permit use of keywords, such as *from*. *special_params* can be used to override any
-        parameter, and add or change any number of additional ones.
-        
-        :param special_params: additional or modified parameters
-        :type special_params: dictionary
-        :param pkg: the name of the package in which the method resides
-        :type pkg: string
-        :param method: the name of the method
-        :type method: string
-        :returns: the response
-        :rtype: json object
-        
-        """
-        
-        frame_record = inspect.stack()[1]
-    
-        if(method is None):
-            method = frame_record[3].replace("_", "")
-    
-        args, _, _, locals_ = inspect.getargvalues(frame_record[0])
-        params = dict((arg, locals_[arg]) for arg in args)
-        
-        for key, value in params.items():
-            if key == "self":
-                params[key] = None
-                
-                if isinstance(value, Package):
-                    pkg = value.__class__.__name__
-    
-        if(special_params is not None):
-            params.update(special_params)
-    
-        params = dict((key.rstrip('_'), params[key]) for key in params)
-    
-        return self.request(pkg, method, params)
     
