@@ -17,9 +17,31 @@
 #
 
 
+"""
+Holds :py:class:`Package`.
+
+"""
+
+
 class Package:
+    """
+    The base class for all :py:mod:`~lfm.packages`.
+    
+    """
+    
+    #: The associated :py:class:`~lfm.app.App`
     app = None
     
     def __init__(self, app):
+        """
+        :param app:
+            The application whose :py:func:`~lfm.app.App.request` or :py:func:`~lfm.app.App.request_auto`
+            will be called by all methods.
+        
+        :type app:
+            :py:class:`~lfm.app.App`
+            
+        """
+        
         self.app = app
         
