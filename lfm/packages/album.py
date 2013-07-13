@@ -17,15 +17,62 @@
 #
 
 
+"""
+Holds :py:class:`Album`.
+
+"""
+
+
 from lfm.package import Package
 
 
 class Album(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s album package.
+    
+    """
+    
     def add_tags(self, artist, album, tags):
+        """
+        Tag an album using a list of supplied tags. 
+        
+        :param artist:
+            The album's artist.
+            
+        :type artist:
+            string
+            
+        :param album:
+            The name of the album.
+            
+        :type album:
+            string
+            
+        :param tags:
+            Tags the album will be tagged with.
+            
+        :type tags:
+            :class:`list <python:list>` of :mod:`strings <python:string>`
+        
+        .. seealso:: `addTags on Last.fm <http://www.last.fm/api/show/album.addTags>`_
+        
+        """
+        
         self.app.request_auto()
     
     
     def get_buy_links(self, country, artist = None, album = None, mbid = None, autocorrect = None):
+        """
+        Get a list of Buy Links for a particular Album. It is required that you supply either the artist and track params or the mbid param. 
+        
+artist (Required (unless mbid)] : The artist name
+album (Required (unless mbid)] : The album
+mbid (Optional) : The musicbrainz id for the album
+autocorrect[0|1] (Optional) : Transform misspelled artist names into correct artist names, returning the correct version instead. The corrected artist name will be returned in the response.
+country (Required) : A country name or two character country code, as defined by the ISO 3166-1 country names standard.
+        
+        """
+        
         data = self.app.request_auto()
         return data["affiliations"]
     

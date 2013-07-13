@@ -39,6 +39,29 @@ class App:
     
     A Last.fm application is associated with an `API account <http://www.last.fm/api/account/create>`_.
     
+    :param key:
+        The key of an API account.
+        
+    :type key:
+        string
+    
+    :param secret:
+        The secret of an API account.
+    
+    :type secret:
+        string
+    
+    :param db:
+        The name of the file which will hold a :mod:`sqlite3 <python:sqlite3>` database
+        tied to this application. The purpose of the database is to keep track of the
+        number of requests made, so the application can comply to the
+        point 4.4 of  `Last.fm's API Terms of Service <http://www.last.fm/api/tos>`_.
+        If the parameter is *None*, the library will not limit the number of requests
+        in any way, but the Last.fm servers probably will.
+        
+    :type db:
+        string
+    
     """
     
     album       = None
@@ -64,32 +87,6 @@ class App:
 
 
     def __init__(self, key, secret, db = None):
-        """
-        :param key:
-            The key of an API account.
-            
-        :type key:
-            string
-        
-        :param secret:
-            The secret of an API account.
-        
-        :type secret:
-            string
-        
-        :param db:
-            The name of the file which will hold a :mod:`sqlite3 <python:sqlite3>` database
-            tied to this application. The purpose of the database is to keep track of the
-            number of requests made, so the application can comply to the
-            point 4.4 of  `Last.fm's API Terms of Service <http://www.last.fm/api/tos>`_.
-            If the parameter is *None*, the library will not limit the number of requests
-            in any way, but the Last.fm servers probably will.
-            
-        :type db:
-            string
-        
-        """
-        
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
