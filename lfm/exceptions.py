@@ -18,8 +18,7 @@
 
 
 """
-Holds all of the exceptions related to Last.fm that the library can raise
-through a :py:func:`~lfm.app.App.request`.
+Holds all of the exceptions raisable by :py:func:`~lfm.app.App.request`, and lfm in general.
 
 """
 
@@ -88,6 +87,11 @@ class InvalidSessionKey(RequestError):
     pass
 
 class InvalidApiKey(RequestError):
+    """
+    You must be `granted <http://www.last.fm/api/account/create>`_ a valid key by Last.fm.
+    
+    """
+    
     pass
 
 class ServiceOffline(RequestError):
@@ -133,11 +137,6 @@ class GeoRestricted(RequestError):
     pass
 
 class RateLimitExceeded(RequestError):
-    """
-    PLACEHOLDER
-    
-    """
-    
     pass
 
 

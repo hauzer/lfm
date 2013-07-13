@@ -10,6 +10,7 @@ lfm Package
 ------------------------
 
 .. automodule:: lfm.exceptions
+   :undoc-members:
 
 :mod:`lfm` Module
 -----------------

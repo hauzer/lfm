@@ -27,21 +27,18 @@ class Package:
     """
     The base class for all :py:mod:`~lfm.packages`.
     
+    :param app:
+        The application whose :py:func:`~lfm.app.App.request` or :py:func:`~lfm.app.App.request_auto`
+        will be called by all methods inside the package.
+    
+    :type app:
+        :py:class:`~lfm.app.App`
+    
     """
     
-    #: The associated :py:class:`~lfm.app.App`
     app = None
+    """ The associated :py:class:`~lfm.app.App`. """
     
     def __init__(self, app):
-        """
-        :param app:
-            The application whose :py:func:`~lfm.app.App.request` or :py:func:`~lfm.app.App.request_auto`
-            will be called by all methods.
-        
-        :type app:
-            :py:class:`~lfm.app.App`
-            
-        """
-        
         self.app = app
         
