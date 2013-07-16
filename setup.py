@@ -1,6 +1,6 @@
 #
 # A Last.fm API interface.
-# Copyright (C) 2013  Nikola Vukosavljević
+# Copyright (C) 2013  Nikola "hauzer" Vukosavljević
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,12 +20,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name              = "lfm",
-      # version = "1.0",
+setup(name              = "lfmh",
+      version           = "1.0.0",
       packages          = find_packages(),
       install_requires  = ["requests"],
 
-      author        = "hauzer",
+      author        = "Nikola \"hauzer\" Vukosavljević",
       author_email  = "hauzer@gmx.com",
       description   = "A Last.fm API interface.",
       # long_description = "",
