@@ -21,7 +21,7 @@ from lfm.package import Package
 
 
 class Tag(Package):
-    def get_info(self, artist = None, mbid = None, lang = None):
+    def get_info(self, tag = None, lang = None):
         data = self.app.request_auto()
         return data["tag"]
     

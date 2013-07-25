@@ -38,12 +38,18 @@ def to_arrays(xs, keys):
     return arrays
 
 
+def class_attrs(cls):
+    attrs = dict((key, value) for key, value in inspect.getmembers(cls)
+                    if not callable(value) and not(key.startswith("__") and key.endswith("__")))
+    
+    return attrs
+
+
 def class_to_arrays(cls, i = 0):
-    attrs = [(key, value) for key, value in inspect.getmembers(cls)
-                    if not callable(value) and not(key.startswith("__") and key.endswith("__"))]
+    attrs = class_attrs(cls)
     
     arrays = {}
-    for key, value in attrs:
+    for key, value in attrs.items():
         arrays[key + "[" + str(i) + "]"] = value
 
     return arrays
