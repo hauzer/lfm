@@ -166,7 +166,7 @@ class App:
     
                 except TypeError:
                     params[key] = str(params[key])
-                
+        
         params["api_sig"] = self.sign_request(params)
                 
         resp = requests.post(lfm.api_root, params)
@@ -220,8 +220,8 @@ class App:
         frame_record = inspect.stack()[1]
     
         if(method is None):
-            method = frame_record[3].replace("_", "")
-    
+            method = frame_record[3].replace("_", "").lower()
+            
         args, _, _, locals_ = inspect.getargvalues(frame_record[0])
         params = dict((arg, locals_[arg]) for arg in args)
         
@@ -230,7 +230,7 @@ class App:
                 params[key] = None
                 
                 if isinstance(value, Package):
-                    pkg = value.__class__.__name__
+                    pkg = value.__class__.__name__.lower()
     
         if(special_params is not None):
             params.update(special_params)
