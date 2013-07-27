@@ -85,10 +85,9 @@ class App:
     sk      = None
     
     db      = None
-    info    = None
 
 
-    def __init__(self, key, secret, db = None, info = None):
+    def __init__(self, key, secret, db = None, name = None):
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -109,7 +108,6 @@ class App:
         self.secret = secret
         
         self.db     = db
-        self.info   = info
 
 
     def request(self, pkg, method, params):
@@ -173,18 +171,7 @@ class App:
         
         params["api_sig"] = self.sign_request(params)
         
-        
-        if self.info is None:
-            info = ("unknown", "unknown")
-        else:
-            info = self.info
-        
-        user_agent = "{}/{} {}".format(info[0], info[1], lfm.USER_AGENT)
-        headers =   {
-                     "User-Agent": user_agent,
-                     }
-        
-        resp = requests.post(lfm.API_ROOT, params, headers = headers)
+        resp = requests.post(lfm.API_ROOT, params)
         data = json.loads(resp.text)
         
         try:
