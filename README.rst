@@ -8,7 +8,7 @@ Features
 - Methods return plain Python types: dictionaries and lists.
 
 - If the user wishes, it can make the application comply to the point 4.4 of
-  `Last.fm's API TOS <http://www.last.fm/api/tos>`_, which says that the request
+  `Last.fm's API ToS <http://www.last.fm/api/tos>`_, which says that the request
   rate of an application should be limited.
 
 - Handles all Last.fm API errors by throwing exceptions.
@@ -25,9 +25,9 @@ A short introduction
 
 Instantiate a Last.fm application::
 
-	import lfm
-	
-	app = lfm.App(API_KEY, SECRET)
+    import lfm
+    
+    app = lfm.App(API_KEY, SECRET)
 
 The above is self-explanatory. You'll need an API key and the corresponding "secret"
 given by Last.fm. Additionally, if you want your application to comply to Last.fm's
@@ -35,22 +35,22 @@ request rate, you'll need to provide a third argument, a file in which a sqlite3
 database which tracks requests will be stored.
 
 ::
-	
-	LFM_FILE = "lfm.dat"
-	
-	app = lfm.App(API_KEY, SECRET, LFM_FILE)
+    
+    LFM_FILE = "lfm.dat"
+    
+    app = lfm.App(API_KEY, SECRET, LFM_FILE)
 
 
 API methods are organized like so::
 
-	data = app.package.method_name(...)
-	
+    data = app.package.method_name(...)
+    
 So, if you wanted, for example, to fetch all recently listened tracks of a user,
 you'd do something like this::
 
-	tracks = app.user.get_recent_tracks(user)
-	
-Note the underscores. Last.fm uses *camelCase* for method names, such a thing
+    tracks = app.user.get_recent_tracks(user)
+    
+Note the underscores. Last.fm uses *camelCase* for method names. Such a thing
 isn't Pythonic, though, hence the transformation of names to *under_scores*.
 
 
@@ -63,42 +63,42 @@ Authenticating
 Let's get a user's session now. There are two ways to do this. The first one
 is by supplying a username and a password::
 
-	session = app.auth.get_mobile_session(user, pwd)
+    session = app.auth.get_mobile_session(user, pwd)
 
 
 *auth.get_session()*
 ~~~~~~~~~~~~~~~~~~~~
-	
+    
 The second one is more complicated, but more secure and trustworthy. First,
 you need to fetch a token::
 
-	token = app.auth.get_token()
-	
+    token = app.auth.get_token()
+    
 Then you have to make the user authenticate the token by pointing him to the
 authentication web-page::
 
-	import webbrowser
-	
-	webbrowser.open(token.url)
-	input("Press enter after granting access.")
-	
+    import webbrowser
+    
+    webbrowser.open(token.url)
+    input("Press enter after granting access.")
+    
 After the user has granted access, all that's left is to fetch the session::
 
-	session = app.auth.get_session(token)
+    session = app.auth.get_session(token)
 
 
 Using the session
 ~~~~~~~~~~~~~~~~~
-	
+    
 Irregardless of what of the two methods you use, a session needs to be binded
 to your app by assigning the session key to the *App*'s *sk* attribute::
 
-	app.sk = session["key"]
+    app.sk = session["key"]
 
 That's all. Now you can call methods which require authentication::
 
-	app.track.remove_tag(artist, track, tag)
-	
+    app.track.remove_tag(artist, track, tag)
+    
 
 More
 ----
@@ -115,15 +115,15 @@ Custom requests
 ---------------
 
 Say, for example, that Last.fm has added a new method not yet available in
-this library. What can be done? The solution is actually quite straightforward: use
-*App.request()*. You can manually specify the API package, method and parameters::
+this library. What can be done then? The solution is actually quite straightforward:
+use *App.request()*. You can manually specify the API package, method and parameters::
 
-	def playlist_remove(app, playlist_id):
-		params = 	{
-				  	 "playlistID": playlist_id,
-				 	}
-	
-		return app.request("playlist", "remove", params)
+    def playlist_remove(app, playlist_id):
+        params = 	{
+                        "playlistID": playlist_id,
+                    }
+    
+        return app.request("playlist", "remove", params)
 
 Simple as that.
 
@@ -143,15 +143,15 @@ to automate every bit of requesting that can possibly be automated, and generall
 succeeds very well! This whole library is built on that one function. Here's an
 example from the source itself::
 
-	class Track(Package):
-	
-		...
-		
-	    def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
-	        data = self.app.request_auto()
-	        return data["track"]
-		
-		...
+    class Track(Package):
+    
+        ...
+        
+        def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
+            data = self.app.request_auto()
+            return data["track"]
+        
+        ...
 
 What kind of magick is this? Well, without going into too much detail
 (open source, remember?), the function cleverly learns all of the three,
@@ -160,33 +160,35 @@ if possible: the package, the method, the parameters:
 - It assembles the method name from the caller function's name; "getInfo"
   in this case.
 
+  
 - The parameters, ignoring *self*, are grabbed from the caller's arguments.
   Parameter names are stripped of trailing underscores, to allow the use of
   parameters such as *from*.
   
-  True to the Python's philosophy of "duck-tape"
-  programming, the function tries to accept all kinds of types as parameters.
-  It handles all primitive ones well: integers, floats, booleans, and such.
-  Of the more complicated types, it can handle lists, but not dictionaries.
-
+  True to the Python's philosophy of "duck-tape" programming, the function tries
+  to accept all kinds of types as parameters. It handles all primitive ones well:
+  integers, floats, booleans, and such. Of the more complicated types, it can
+  handle lists, but not dictionaries.
+  
+  
 - The name of the package is learned from the name of the class the function's
   in, but **only** if the class inherits *lfm.Package*.
   
 *request_auto()* is not only intelligent and elegant, it's also flexible.
 You can override any of the three::
 
-	def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
-		package = "the_correct_package_name"
-		method	= "the_correct_method_name"
-		
-		params 	= 	{
-					 "special"	: 0xDEADBEEF,
-					 "mbid"		: None,
-					}
-		
-		data = self.app.request_auto(package, method, params)
-		return data["track"]
-		
+    def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
+        package = "the_correct_package_name"
+        method	= "the_correct_method_name"
+        
+        params 	= 	{
+                        "special"   : 0xDEADBEEF,
+                        "mbid"	    : None,
+                    }
+        
+        data = self.app.request_auto(package, method, params)
+        return data["track"]
+        
 So, we have added a new parameter called *special*, and made *mbid*
 always *None*, whatever the user may have passed. Pretty neat, huh?
 
@@ -199,15 +201,15 @@ Inheriting Package
 
 Very well, your custom-made Package would look something like this::
 
-	class Forum(Package):
-		def post(self, threadid, msg):
-			data = self.app.request_auto()
-			return data
-	
+    class Forum(Package):
+        def post(self, threadid, msg):
+            data = self.app.request_auto()
+            return data
+    
 And you'd use it like so::
 
-	forum = Forum(app)
-	forum.post("1832723", "Hello folks!")
+    forum = Forum(app)
+    forum.post("1832723", "Hello folks!")
 
 
 Inheriting App
@@ -215,14 +217,14 @@ Inheriting App
 
 To add the finishing touch, you could extend *App*::
 
-	class App(lfm.App):
-		forum = None
-		
-		def __init__(self, key, secret, db = None):
-			super().__init__(key, secret, db)
-			
-			forum = Forum(self)
+    class App(lfm.App):
+        forum = None
+        
+        def __init__(self, key, secret, db = None):
+            super().__init__(key, secret, db)
+            
+            forum = Forum(self)
 
 And with that::
 
-	app.forum.post("1832723", "Hello folks!")
+    app.forum.post("1832723", "Hello folks!")
