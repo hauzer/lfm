@@ -119,7 +119,7 @@ this library. What can be done then? The solution is actually quite straightforw
 use *App.request()*. You can manually specify the API package, method and parameters::
 
     def playlist_remove(app, playlist_id):
-        params = 	{
+        params =    {
                         "playlistID": playlist_id,
                     }
     
@@ -159,17 +159,14 @@ if possible: the package, the method, the parameters:
 
 - It assembles the method name from the caller function's name; "getInfo"
   in this case.
-
   
 - The parameters, ignoring *self*, are grabbed from the caller's arguments.
   Parameter names are stripped of trailing underscores, to allow the use of
   parameters such as *from*.
-  
   True to the Python's philosophy of "duck-tape" programming, the function tries
   to accept all kinds of types as parameters. It handles all primitive ones well:
   integers, floats, booleans, and such. Of the more complicated types, it can
   handle lists, but not dictionaries.
-  
   
 - The name of the package is learned from the name of the class the function's
   in, but **only** if the class inherits *lfm.Package*.
@@ -179,11 +176,11 @@ You can override any of the three::
 
     def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
         package = "the_correct_package_name"
-        method	= "the_correct_method_name"
+        method    = "the_correct_method_name"
         
-        params 	= 	{
+        params     =     {
                         "special"   : 0xDEADBEEF,
-                        "mbid"	    : None,
+                        "mbid"        : None,
                     }
         
         data = self.app.request_auto(package, method, params)
@@ -191,7 +188,6 @@ You can override any of the three::
         
 So, we have added a new parameter called *special*, and made *mbid*
 always *None*, whatever the user may have passed. Pretty neat, huh?
-
 Note that *params* will be **merged into** the auto-gathered
 dictionary of parameters, not overwrite them. 
 
