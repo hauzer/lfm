@@ -120,8 +120,8 @@ use *App.request()*. You can manually specify the API package, method and parame
 
     def playlist_remove(app, playlist_id):
         params =    {
-                        "playlistID": playlist_id,
-                    }
+                     "playlistID": playlist_id,
+                     }
     
         return app.request("playlist", "remove", params)
 
@@ -178,10 +178,10 @@ You can override any of the three::
         package = "the_correct_package_name"
         method    = "the_correct_method_name"
         
-        params     =     {
-                        "special"   : 0xDEADBEEF,
-                        "mbid"        : None,
-                    }
+        params     =    {
+                         "special"   : 0xDEADBEEF,
+                         "mbid"        : None,
+                         }
         
         data = self.app.request_auto(package, method, params)
         return data["track"]
