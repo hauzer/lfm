@@ -1,0 +1,7 @@
+syntax: glob
+MANIFEST
+.*
+dist
+__pycache__
+_*
+*.egg-info
