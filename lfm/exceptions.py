@@ -56,7 +56,7 @@ Holds all of the exceptions raisable by :py:func:`~lfm.app.App.request`, and lfm
 class RequestError(Exception):
     """
     The base exception all other exceptions are based on.
-    It's never raised.
+    It's never raised directly.
     
     """
     
