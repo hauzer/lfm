@@ -82,11 +82,12 @@ class App:
     
     key     = None
     secret  = None
-    db      = None
     sk      = None
+    
+    db      = None
 
 
-    def __init__(self, key, secret, db = None):
+    def __init__(self, key, secret, db = None, name = None):
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -103,9 +104,10 @@ class App:
         self.user        = pkg.User(self)
         self.venue       = pkg.Venue(self)
         
-        self.key = key
+        self.key    = key
         self.secret = secret
-        self.db = db
+        
+        self.db     = db
 
 
     def request(self, pkg, method, params):
@@ -168,8 +170,8 @@ class App:
                     params[key] = str(params[key])
         
         params["api_sig"] = self.sign_request(params)
-                
-        resp = requests.post(lfm.api_root, params)
+        
+        resp = requests.post(lfm.API_ROOT, params)
         data = json.loads(resp.text)
         
         try:
@@ -294,10 +296,10 @@ class App:
             dbcur.execute("create table timestamps (timestamps integer)")
             
         except sqlite3.OperationalError:
-            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - lfm.requests_period,))
+            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - lfm.REQUEST_RATE_PERIOD,))
             dbcur.execute("select count(timestamps) from timestamps")
 
-            if dbcur.fetchone()[0] >= lfm.max_requests:
+            if dbcur.fetchone()[0] >= lfm.MAX_REQUESTS:
                 can = False
         
         dbconn.commit()

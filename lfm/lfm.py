@@ -17,8 +17,10 @@
 #
 
 
-api_root = "https://ws.audioscrobbler.com/2.0/"
+VERSION = "1.0.2"
 
-requests_period     = 300
-request_interval    = 5
-max_requests        = requests_period / request_interval
+API_ROOT = "https://ws.audioscrobbler.com/2.0/"
+
+REQUEST_RATE_PERIOD    = 300
+REQUEST_RATE_INTERVAL   = 5
+MAX_REQUESTS            = REQUEST_RATE_PERIOD / REQUEST_RATE_INTERVAL
