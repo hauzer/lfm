@@ -23,6 +23,9 @@ A tutorial
 A short introduction
 --------------------
 
+*lfm.App*
+~~~~~~~~~
+
 Instantiate a Last.fm application::
 
     import lfm
@@ -30,8 +33,8 @@ Instantiate a Last.fm application::
     app = lfm.App(API_KEY, SECRET)
 
 The above is self-explanatory. You'll need an API key and the corresponding "secret"
-given by Last.fm. Additionally, if you want your application to comply to Last.fm's
-request rate, you'll need to provide a third argument, a file in which a sqlite3
+given by Last.fm. Additionally, if you want your application to comply to the Last.fm's
+request rate limit, you'll need to provide a third argument, a file in which a sqlite3
 database which tracks requests will be stored.
 
 ::
@@ -40,6 +43,20 @@ database which tracks requests will be stored.
     
     app = lfm.App(API_KEY, SECRET, LFM_FILE)
 
+As a fourth argument, you can provide a tuple of your program's name and version,
+to be used in the user-agent::
+
+    NAME    = "myprogram"
+    VERSION = "1.0.0"
+    
+    app = lfm.App(API_KEY, SECRET, LFM_FILE, (NAME, VERSION))
+    
+The user-agent is formatted as "NAME/VERSION lfm/LFMVERSION". If you don't provide
+this information, both the name and version will be "unknown".
+
+
+Methods and packages
+~~~~~~~~~~~~~~~~~~~~
 
 API methods are organized like so::
 
@@ -95,7 +112,7 @@ to your app by assigning the session key to the *App*'s *sk* attribute::
 
     app.sk = session["key"]
 
-That's all. Now you can call methods which require authentication::
+That's all. You can now call methods which require authentication::
 
     app.track.remove_tag(artist, track, tag)
     
@@ -192,8 +209,8 @@ Note that *params* will be **merged into** the auto-gathered
 dictionary of parameters, not overwrite them. 
 
 
-Inheriting Package
-~~~~~~~~~~~~~~~~~~
+Inheriting *Package*
+~~~~~~~~~~~~~~~~~~~~
 
 Very well, your custom-made Package would look something like this::
 
@@ -208,8 +225,8 @@ And you'd use it like so::
     forum.post("1832723", "Hello folks!")
 
 
-Inheriting App
-~~~~~~~~~~~~~~
+Inheriting *App*
+~~~~~~~~~~~~~~~~
 
 To add the finishing touch, you could extend *App*::
 
