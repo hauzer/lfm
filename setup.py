@@ -17,11 +17,12 @@
 #
 
 
+from lfm        import VERSION
 from setuptools import setup, find_packages
 
 
 setup(name              = "lfmh",
-      version           = "1.0.2",
+      version           = VERSION,
       packages          = find_packages(),
       install_requires  = ["requests"],
 

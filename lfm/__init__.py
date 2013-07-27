@@ -21,3 +21,4 @@ from lfm            import exceptions
 from lfm.app        import App
 from lfm.package    import Package
 from lfm.scrobble   import Scrobble
+from lfm.lfm        import *
