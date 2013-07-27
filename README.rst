@@ -7,11 +7,11 @@ Features
 
 - Methods return plain Python types: dictionaries and lists.
 
-- If the user wishes, it can make the application comply to the point 4.4 of
+- If the user wishes, the library can make an application comply to the point 4.4 of
   `Last.fm's API ToS <http://www.last.fm/api/tos>`_, which says that the request
-  rate of an application should be limited.
+  rate of an application must be limited.
 
-- Handles all Last.fm API errors by throwing exceptions.
+- Handles all Last.fm API errors via exceptions.
 
 - Easily extendible.
 
