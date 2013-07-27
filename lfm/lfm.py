@@ -17,10 +17,10 @@
 #
 
 
-VERSION     = "1.0.2"
-USER_AGENT  = "lfm/{}".format(VERSION)
+VERSION = "1.0.2"
 
-API_ROOT                = "https://ws.audioscrobbler.com/2.0/"
-REQUEST_RATE_PERIOD     = 300
+API_ROOT = "https://ws.audioscrobbler.com/2.0/"
+
+REQUEST_RATE_PERIOD    = 300
 REQUEST_RATE_INTERVAL   = 5
 MAX_REQUESTS            = REQUEST_RATE_PERIOD / REQUEST_RATE_INTERVAL
