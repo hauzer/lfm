@@ -21,16 +21,16 @@ Holds :py:class:`App`.
 
 """
 
-import hashlib
-import inspect
-import json
-from lfm import lfm
-from lfm import exceptions as e
-from lfm import packages as pkg
-from lfm.package import Package
-import requests
-import sqlite3
-import time
+import  hashlib
+import  inspect
+import  json
+from    lfm         import lfm
+from    lfm         import exceptions   as e
+from    lfm         import packages     as pkg
+from    lfm.package import Package
+import  requests
+import  sqlite3
+import  time
 
 
 class App:
@@ -82,12 +82,14 @@ class App:
     
     key     = None
     secret  = None
+    info    = None
     sk      = None
     
-    db      = None
+    db  = None
+    dbc = None
 
 
-    def __init__(self, key, secret, db = None, name = None):
+    def __init__(self, key, secret, db_file = None, info = None):
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -106,9 +108,15 @@ class App:
         
         self.key    = key
         self.secret = secret
+        self.info   = info
         
-        self.db     = db
-
+        if db_file is not None:
+            self.db = sqlite3.connect(db_file)
+            self.dbc = self.db.cursor()
+            
+            if not self.db_table_exists_timestamps():
+                self.db_create_table_timestamps()
+        
 
     def request(self, pkg, method, params):
         """
@@ -139,10 +147,8 @@ class App:
             :mod:`json object <python:json>`
         
         """
-    
-        if self.can_request():
-            self.log_request()
-        else:
+        
+        if not self.can_request():
             raise e.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
     
     
@@ -171,14 +177,26 @@ class App:
         
         params["api_sig"] = self.sign_request(params)
         
-        resp = requests.post(lfm.API_ROOT, params)
+        
+        if self.info is None:
+            info = ("unknown", "unknown")
+        else:
+            info = self.info
+        
+        user_agent = "{}/{} {}".format(info[0], info[1], lfm.USER_AGENT)
+        headers =   {
+                     "User-Agent": user_agent,
+                     }
+        
+        resp = requests.post(lfm.API_ROOT, params, headers = headers)
+        self.log_request()
         data = json.loads(resp.text)
         
         try:
             raise e.codes[data["error"]](data["message"])
         except KeyError:
             pass
-    
+        
         return data
 
 
@@ -281,52 +299,39 @@ class App:
 
 
     def can_request(self):
-        can = True
-        
-        try:
-            dbconn = sqlite3.connect(self.db)
-            
-        except TypeError:
-            return can
-        
-        dbcur = dbconn.cursor()
-        time_now = int(time.time())
-        
-        try:
-            dbcur.execute("create table timestamps (timestamps integer)")
-            
-        except sqlite3.OperationalError:
-            dbcur.execute("delete from timestamps where timestamps < ?", (time_now - lfm.REQUEST_RATE_PERIOD,))
-            dbcur.execute("select count(timestamps) from timestamps")
-
-            if dbcur.fetchone()[0] >= lfm.MAX_REQUESTS:
-                can = False
-        
-        dbconn.commit()
-        dbcur.close()
-        dbconn.close()
-        
-        return can
-        
-
+        if self.requests_logged() >= lfm.MAX_REQUESTS:
+            return False
+        else:
+            return True
+    
+    
     def log_request(self):
-        try:
-            dbconn = sqlite3.connect(self.db)
-            
-        except TypeError:
-            raise
+        if self.db is None:
+            return
         
-        dbcur = dbconn.cursor()
+        self.dbc.execute("insert into timestamps (timestamps) values (?)", (int(time.time()),))
+        self.db.commit()
+    
+    
+    def requests_logged(self):
+        if self.db is None:
+            return 0
         
-        try:
-            dbcur.execute("create table timestamps (timestamps integer)")
-            
-        except sqlite3.OperationalError:
-            pass
-            
-        dbcur.execute("insert into timestamps (timestamps) values (?)", (int(time.time()),))
+        self.dbc.execute("delete from timestamps where timestamps < ?", (int(time.time()) - lfm.REQUEST_RATE_PERIOD,))
+        self.dbc.execute("select count(timestamps) from timestamps")
+        requests = self.dbc.fetchone()[0]
+        self.db.commit()
         
-        dbconn.commit()
-        dbcur.close()
-        dbconn.close()
+        return requests
+    
+    
+    def db_table_exists_timestamps(self):
+        self.dbc.execute("select exists(select * from sqlite_master " \
+                         "where type = \"table\" and name = \"timestamps\")")
+        return self.dbc.fetchone()[0]
+    
+    
+    def db_create_table_timestamps(self):
+        self.dbc.execute("create table timestamps (timestamps integer)")
+        self.db.commit()
     
