@@ -136,9 +136,9 @@ this library. What can be done then? The solution is actually quite straightforw
 use *App.request()*. You can manually specify the API package, method and parameters::
 
     def playlist_remove(app, playlist_id):
-        params =    {
-                     "playlistID": playlist_id,
-                     }
+        params = {
+                  "playlistID": playlist_id,
+                 }
     
         return app.request("playlist", "remove", params)
 
@@ -193,12 +193,12 @@ You can override any of the three::
 
     def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
         package = "the_correct_package_name"
-        method    = "the_correct_method_name"
+        method  = "the_correct_method_name"
         
-        params     =    {
-                         "special"   : 0xDEADBEEF,
-                         "mbid"        : None,
-                         }
+        params  = {
+                   "special" : 0xDEADBEEF,
+                   "mbid"    : None,
+                  }
         
         data = self.app.request_auto(package, method, params)
         return data["track"]
@@ -233,8 +233,8 @@ To add the finishing touch, you could extend *App*::
     class App(lfm.App):
         forum = None
         
-        def __init__(self, key, secret, db = None):
-            super().__init__(key, secret, db)
+        def __init__(self, key, secret, db = None, info = None):
+            super().__init__(key, secret, db, info)
             
             forum = Forum(self)
 
