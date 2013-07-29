@@ -83,13 +83,14 @@ class App:
     key     = None
     secret  = None
     info    = None
+    frozen  = None
     sk      = None
     
     db  = None
     dbc = None
 
 
-    def __init__(self, key, secret, db_file = None, info = None):
+    def __init__(self, key, secret, db_file = None, info = None, frozen = False):
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -109,6 +110,7 @@ class App:
         self.key    = key
         self.secret = secret
         self.info   = info
+        self.frozen = frozen
         
         if db_file is not None:
             self.db = sqlite3.connect(db_file)
@@ -188,7 +190,12 @@ class App:
                      "User-Agent": user_agent,
                      }
         
-        resp = requests.post(lfm.API_ROOT, params, headers = headers)
+        if self.frozen:
+            verify = "cacert.pem"
+        else:
+            verify = True
+        
+        resp = requests.post(lfm.API_ROOT, params, headers = headers, verify = verify)
         self.log_request()
         data = json.loads(resp.text)
         
