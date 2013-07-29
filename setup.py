@@ -39,12 +39,12 @@ setup(name              = "lfmh",
       url               = "https://bitbucket.org/hauzer/lfm/",
       download_url      = "https://bitbucket.org/hauzer/lfm/downloads",
       
-      classifiers = {
+      classifiers = [
                      "Development Status :: 3 - Alpha",
                      "Intended Audience :: Developers",
                      "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
                      "Operating System :: OS Independent",
                      "Programming Language :: Python :: 3",
                      "Topic :: Software Development :: Libraries",
-                    }
+                    ]
       )
