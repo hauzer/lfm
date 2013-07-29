@@ -21,16 +21,30 @@ from lfm        import VERSION
 from setuptools import setup, find_packages
 
 
+readme_lines = open("README.rst", "r").read().splitlines()
+
+description = readme_lines[0]
+long_description = "\n".join(readme_lines[2:])
+
 setup(name              = "lfmh",
       version           = VERSION,
       packages          = find_packages(),
       install_requires  = ["requests"],
 
-      author        = "Nikola \"hauzer\" Vukosavljević",
-      author_email  = "hauzer@gmx.com",
-      description   = "A Last.fm API interface.",
-      # long_description = "",
-      license       = "GPLv3",
-      url           = "https://bitbucket.org/hauzer/lfm/",
-      download_url  = "https://bitbucket.org/hauzer/lfm/downloads",
+      author            = "Nikola \"hauzer\" Vukosavljević",
+      author_email      = "hauzer@gmx.com",
+      description       = description,
+      long_description  = long_description,
+      license           = "GPLv3",
+      url               = "https://bitbucket.org/hauzer/lfm/",
+      download_url      = "https://bitbucket.org/hauzer/lfm/downloads",
+      
+      classifiers = {
+                     "Development Status :: 3 - Alpha",
+                     "Intended Audience :: Developers",
+                     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+                     "Operating System :: OS Independent",
+                     "Programming Language :: Python :: 3",
+                     "Topic :: Software Development :: Libraries",
+                    }
       )
