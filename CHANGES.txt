@@ -1,6 +1,6 @@
 v1.0.3, 2013-07-29
  - Cleaned up the code related to logging of requests.
- - Added a user agent.
+ - Added a user-agent, and a user-agent option.
  - The package now imports everything from lfm.lfm.
  - Better code organization here and there.
 
