@@ -1,8 +1,9 @@
+#!/usr/bin/env python
 # coding=utf-8
 
 #
 # A Last.fm API interface.
-# Copyright (C) 2013  Nikola "hauzer" Vukosavljević
+# Copyright (C) 2013  Никола "hauzer" Вукосављевић
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,8 +20,8 @@
 #
 
 
-from lfm        import VERSION
-from setuptools import setup, find_packages
+import  info
+from    setuptools  import  find_packages, setup
 
 
 readme_lines = open("README.rst", "r").read().splitlines()
@@ -28,18 +29,19 @@ readme_lines = open("README.rst", "r").read().splitlines()
 description = readme_lines[0]
 long_description = "\n".join(readme_lines[2:])
 
-setup(name              = "lfmh",
-      version           = VERSION,
+setup(name              = "{}h".format(info.NAME),
+      version           = info.VERSION,
       packages          = find_packages(),
+      py_modules        = ["info"],
       install_requires  = ["requests"],
 
-      author            = "Nikola \"hauzer\" Vukosavljević",
+      author            = info.AUTHOR,
       author_email      = "hauzer@gmx.com",
       description       = description,
       long_description  = long_description,
       license           = "GPLv3",
-      url               = "https://bitbucket.org/hauzer/lfm/",
-      download_url      = "https://bitbucket.org/hauzer/lfm/downloads",
+      url               = "https://bitbucket.org/{}/{}/".format(info.AUTHOR_NICK, info.NAME),
+      download_url      = "https://bitbucket.org/{}/{}/downloads".format(info.AUTHOR_NICK, info.NAME),
       
       classifiers = [
                      "Development Status :: 3 - Alpha",
@@ -50,3 +52,4 @@ setup(name              = "lfmh",
                      "Topic :: Software Development :: Libraries",
                     ]
       )
+
