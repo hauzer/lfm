@@ -1,3 +1,5 @@
+# coding=utf-8
+
 #
 # A Last.fm API interface.
 # Copyright (C) 2013  Никола "hauzer" Вукосављевић
