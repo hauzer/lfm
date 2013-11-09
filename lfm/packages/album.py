@@ -67,11 +67,11 @@ class Album(Package):
         """
         Get a list of Buy Links for a particular Album. It is required that you supply either the artist and track params or the mbid param. 
         
-artist (Required (unless mbid)] : The artist name
-album (Required (unless mbid)] : The album
-mbid (Optional) : The musicbrainz id for the album
-autocorrect[0|1] (Optional) : Transform misspelled artist names into correct artist names, returning the correct version instead. The corrected artist name will be returned in the response.
-country (Required) : A country name or two character country code, as defined by the ISO 3166-1 country names standard.
+        artist (Required (unless mbid)] : The artist name
+        album (Required (unless mbid)] : The album
+        mbid (Optional) : The musicbrainz id for the album
+        autocorrect[0|1] (Optional) : Transform misspelled artist names into correct artist names, returning the correct version instead. The corrected artist name will be returned in the response.
+        country (Required) : A country name or two character country code, as defined by the ISO 3166-1 country names standard.
         
         """
         

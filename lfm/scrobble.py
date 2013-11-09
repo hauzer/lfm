@@ -20,18 +20,6 @@
 
 
 class Scrobble:
-    artist          = None
-    track           = None
-    timestamp       = None
-    album           = None
-    duration        = None
-    mbid            = None
-    tracknumber     = None
-    albumartist     = None
-    streamid        = None
-    chosenbyuser    = None
-    context         = None
-
     def __init__(self, artist, track, timestamp, album = None, duration = None, mbid = None, \
                  tracknumber = None, albumartist = None, streamid = None, chosenbyuser = None, \
                  context = None):
