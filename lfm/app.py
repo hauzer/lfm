@@ -65,31 +65,6 @@ class App:
         string
     
     """
-    
-    album       = None
-    artist      = None
-    auth        = None
-    chart       = None
-    event       = None
-    geo         = None
-    group       = None
-    library     = None
-    playlist    = None
-    radio       = None
-    tag         = None
-    tasteometer = None
-    track       = None
-    user        = None
-    venue       = None
-    
-    key     = None
-    secret  = None
-    info    = None
-    frozen  = None
-    sk      = None
-    
-    db  = None
-    dbc = None
 
 
     def __init__(self, key, secret, db_file = None, info = None, frozen = False):

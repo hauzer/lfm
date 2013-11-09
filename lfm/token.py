@@ -20,10 +20,6 @@
 
 
 class Token:
-    str = None
-    url = None
-    
-    
     def __str__(self):
         return self.str
     

@@ -37,10 +37,8 @@ class Package:
         :py:class:`~lfm.app.App`
     
     """
-    
-    app = None
-    """ The associated :py:class:`~lfm.app.App`. """
-    
+
+
     def __init__(self, app):
         self.app = app
         
