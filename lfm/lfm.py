@@ -18,9 +18,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import info
 
-VERSION     = "1.0.3"
-USER_AGENT  = "lfm/{}".format(VERSION)
+
+VERSION     = info.VERSION
+USER_AGENT  = "{}/{}".format(info.NAME, VERSION)
 
 API_ROOT                = "https://ws.audioscrobbler.com/2.0/"
 REQUEST_RATE_PERIOD     = 300
