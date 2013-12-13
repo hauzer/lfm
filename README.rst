@@ -107,7 +107,7 @@ After the user has granted access, all that's left is to fetch the session::
 Using the session
 ~~~~~~~~~~~~~~~~~
     
-Irregardless of what of the two methods you use, a session needs to be binded
+Irregardless of which of the two methods you use, a session needs to be bound
 to your app by assigning the session key to the *App*'s *sk* attribute::
 
     app.sk = session["key"]
