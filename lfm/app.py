@@ -67,7 +67,7 @@ class App:
     """
 
 
-    def __init__(self, key, secret, db_file = None, info = None, frozen = False):
+    def __init__(self, key = lfm.KEY, secret = lfm.SECRET, db_file = None, info = None, frozen = False):
         self.album       = pkg.Album(self)
         self.artist      = pkg.Artist(self)
         self.auth        = pkg.Auth(self)
@@ -84,8 +84,9 @@ class App:
         self.user        = pkg.User(self)
         self.venue       = pkg.Venue(self)
         
-        self.key    = key
+        self.key = key
         self.secret = secret
+        self.sk = None
         self.info   = info
         self.frozen = frozen
         
@@ -95,6 +96,8 @@ class App:
             
             if not self.db_table_exists_timestamps():
                 self.db_create_table_timestamps()
+        else:
+            self.db = None
         
 
     def request(self, pkg, method, params):
