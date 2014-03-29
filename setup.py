@@ -44,7 +44,7 @@ setup(name              = "{}h".format(info.NAME),
       download_url      = "https://bitbucket.org/{}/{}/downloads".format(info.AUTHOR_NICK, info.NAME),
       
       classifiers = [
-                     "Development Status :: 3 - Alpha",
+                     "Development Status :: 4 - Beta",
                      "Intended Audience :: Developers",
                      "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
                      "Operating System :: OS Independent",
