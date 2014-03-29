@@ -160,7 +160,7 @@ class App:
         params["api_sig"] = self.sign_request(params)
         
         
-        resp = requests.post(lfm.API_ROOT, params, headers = get_headers(info))
+        resp = requests.post(lfm.API_ROOT, params, headers = self.get_headers(self.info))
         self.log_request()
         data = json.loads(resp.text)
         
@@ -297,11 +297,9 @@ class App:
         return requests
     
     
-    def get_headers(info):
-       if self.info is None:
+    def get_headers(self, info):
+        if info is None:
             info = ("unknown", "unknown")
-        else:
-            info = self.info
         
         user_agent = "{}/{} {}".format(info[0], info[1], lfm.USER_AGENT)
         return {"User-Agent": user_agent}
