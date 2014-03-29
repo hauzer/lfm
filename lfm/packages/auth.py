@@ -29,13 +29,18 @@ class Auth(Package):
         return data["session"]
     
     
-    def get_session(self, token):
-        data = self.app.request_auto()
-        return data["session"]
-    
-    
     def get_token(self):
         data = self.app.request_auto()
         token = Token(self.app, data["token"])
         
         return token
+    
+    
+    def get_session(self, token):
+        data = self.app.request_auto()
+        return data["session"]
+    
+    
+    def get_url(self, callback):
+        return "http://www.last.fm/api/auth/?api_key={}&cb={}".format(self.app.key, callback)
+    
