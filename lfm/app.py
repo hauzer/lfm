@@ -160,22 +160,7 @@ class App:
         params["api_sig"] = self.sign_request(params)
         
         
-        if self.info is None:
-            info = ("unknown", "unknown")
-        else:
-            info = self.info
-        
-        user_agent = "{}/{} {}".format(info[0], info[1], lfm.USER_AGENT)
-        headers =   {
-                     "User-Agent": user_agent,
-                     }
-        
-        if self.frozen:
-            verify = "cacert.pem"
-        else:
-            verify = True
-        
-        resp = requests.post(lfm.API_ROOT, params, headers = headers, verify = verify)
+        resp = requests.post(lfm.API_ROOT, params, headers = get_headers(info))
         self.log_request()
         data = json.loads(resp.text)
         
@@ -310,6 +295,16 @@ class App:
         self.db.commit()
         
         return requests
+    
+    
+    def get_headers(info):
+       if self.info is None:
+            info = ("unknown", "unknown")
+        else:
+            info = self.info
+        
+        user_agent = "{}/{} {}".format(info[0], info[1], lfm.USER_AGENT)
+        return {"User-Agent": user_agent}
     
     
     def db_table_exists_timestamps(self):
