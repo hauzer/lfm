@@ -1,3 +1,7 @@
+v1.0.4, 2013-03-29
+ - Added a constant: 'MAX_USERNAME_LENGTH'.
+ - Applied various minor fixes.
+
 v1.0.3, 2013-07-29
  - Cleaned up the code related to logging of requests.
  - Added a user-agent, and a user-agent option.

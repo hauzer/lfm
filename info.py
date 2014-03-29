@@ -20,7 +20,7 @@
 
 
 NAME        = "lfm"
-VERSION     = "1.3.0"
+VERSION     = "1.0.4"
 
 AUTHOR_FIRST_NAME   = "Никола"
 AUTHOR_LAST_NAME    = "Вукосављевић"
