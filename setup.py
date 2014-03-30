@@ -20,7 +20,7 @@
 #
 
 
-from    lfm         import  info
+from    lastfm      import  info
 from    setuptools  import  find_packages, setup
 
 
