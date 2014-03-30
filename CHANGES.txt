@@ -1,3 +1,7 @@
+v1.0.5, 2014-03-30:
+ - Added an authentication method for web apps: app.auth.get_url(callback)
+ - Fixed info.py being in the global namespace
+
 v1.0.4, 2014-03-29
  - Added a constant: 'MAX_USERNAME_LENGTH'.
  - Applied various minor fixes.
@@ -22,3 +26,4 @@ v1.0.1, 2013-07-23
 
 v1.0.0, 2013-06-26
  - The initial release.
+ 
