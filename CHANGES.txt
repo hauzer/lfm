@@ -1,4 +1,4 @@
-v1.0.4, 2013-03-29
+v1.0.4, 2014-03-29
  - Added a constant: 'MAX_USERNAME_LENGTH'.
  - Applied various minor fixes.
 
