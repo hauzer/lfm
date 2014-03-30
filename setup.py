@@ -32,7 +32,6 @@ long_description = "\n".join(readme_lines[2:])
 setup(name              = "{}h".format(info.NAME),
       version           = info.VERSION,
       packages          = find_packages(),
-      py_modules        = ["info"],
       install_requires  = ["requests"],
 
       author            = info.AUTHOR,
