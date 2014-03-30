@@ -28,14 +28,18 @@ A short introduction
 
 Instantiate a Last.fm application::
 
-    import lfm
+    from lfm import lfm
     
     app = lfm.App(API_KEY, SECRET)
 
 The above is self-explanatory. You'll need an API key and the corresponding "secret"
-given by Last.fm. Additionally, if you want your application to comply to the Last.fm's
-request rate limit, you'll need to provide a third argument, a file in which a sqlite3
-database which tracks requests will be stored.
+given by Last.fm. If you don't have those handy, you can ommit them for **testing**
+purposes, as *lfm* comes with its own. You are expected to provide your own key and
+secret in real applications.
+
+If you want your application to comply to Last.fm's request rate limit, you'll need
+to provide a third argument, a file in which a sqlite3 database which tracks requests
+will be stored.
 
 ::
     
@@ -77,7 +81,7 @@ Authenticating
 *auth.get_mobile_session()*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's get a user's session now. There are two ways to do this. The first one
+Let's get a user's session now. There are three ways to do this. The first one
 is by supplying a username and a password::
 
     session = app.auth.get_mobile_session(user, pwd)
@@ -104,13 +108,23 @@ After the user has granted access, all that's left is to fetch the session::
     session = app.auth.get_session(token)
 
 
+*auth.get_url()*
+~~~~~~~~~~~~~~~~~~~~
+
+The third one is for web apps. `auth.get_url()` takes one argument, a callback url,
+and returns an url which points to the authentication page. When the user
+authenticates, the page redirects to the callback url with the token appended as a
+GET parameter.  
+For more information, consult the `official Last.fm documentation <http://www.last.fm/api/webauth>`_.
+
+
 Using the session
 ~~~~~~~~~~~~~~~~~
-    
-Irregardless of which of the two methods you use, a session needs to be bound
-to your app by assigning the session key to the *App*'s *sk* attribute::
 
-    app.sk = session["key"]
+Regardless of which of the methods you use, a session needs to be bound to your
+app by assigning the session key to the *App*'s *session_key* attribute::
+
+    app.session_key = session["key"]
 
 That's all. You can now call methods which require authentication::
 
@@ -241,3 +255,4 @@ To add the finishing touch, you could extend *App*::
 And with that::
 
     app.forum.post("1832723", "Hello folks!")
+    
