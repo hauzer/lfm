@@ -803,10 +803,10 @@ class App:
         self.user        = User(self)
         self.venue       = Venue(self)
         
-        self.key = key
-        self.secret = secret
-        self.sk = None
-        self.info   = info
+        self.key            = key
+        self.secret         = secret
+        self.session_key    = None
+        self.info           = info
         
         if db_file is not None:
             self.db = sqlite3.connect(db_file)
@@ -854,7 +854,7 @@ class App:
     
         params.update({"api_key": self.key,
                        "method": pkg + "." + method,
-                       "sk": self.sk,
+                       "sk": self.session_key,
                        "format": "json"})
     
         # Remove keys with a value of None.
