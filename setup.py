@@ -20,7 +20,7 @@
 #
 
 
-import  info
+from    lfm         import  info
 from    setuptools  import  find_packages, setup
 
 
