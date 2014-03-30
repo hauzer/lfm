@@ -28,7 +28,7 @@ A short introduction
 
 Instantiate a Last.fm application::
 
-    from lfm import lfm
+    from lastfm import lfm
     
     app = lfm.App(API_KEY, SECRET)
 
