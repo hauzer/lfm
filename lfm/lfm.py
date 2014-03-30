@@ -786,7 +786,7 @@ class App:
     """
 
 
-    def __init__(self, key = KEY, secret = SECRET, db_file = None, info = None, frozen = False):
+    def __init__(self, key = KEY, secret = SECRET, db_file = None, info = None):
         self.album       = Album(self)
         self.artist      = Artist(self)
         self.auth        = Auth(self)
@@ -807,7 +807,6 @@ class App:
         self.secret = secret
         self.sk = None
         self.info   = info
-        self.frozen = frozen
         
         if db_file is not None:
             self.db = sqlite3.connect(db_file)
@@ -1034,6 +1033,10 @@ class App:
         self.dbc.execute("create table timestamps (timestamps integer)")
         self.db.commit()
 
+
+#
+# Utility functions
+#
 
 def to_array(xs, key):
     array = {}
