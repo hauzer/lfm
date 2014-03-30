@@ -1,3 +1,8 @@
+v1.1.0, 2014-03-30:
+ - Changed the directory structure to a simpler one, breaking backwards compatibility, and fixing some problems.
+   Practically speaking, you'll now do 'from lfm import lfm' as opposed to just 'import lfm'.
+ - Renamed 'app.sk' to 'app.session_key'.
+
 v1.0.5, 2014-03-30:
  - Added an authentication method for web apps: app.auth.get_url(callback)
  - Fixed info.py being in the global namespace
