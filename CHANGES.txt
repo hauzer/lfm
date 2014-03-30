@@ -1,6 +1,6 @@
 v1.1.0, 2014-03-30:
  - Changed the directory structure to a simpler one, breaking backwards compatibility, and fixing some problems.
-   Practically speaking, you'll now do 'from lfm import lfm' as opposed to just 'import lfm'.
+   Practically speaking, you'll now do 'from lastfm import lfm' as opposed to just 'import lfm'.
  - Renamed 'app.sk' to 'app.session_key'.
 
 v1.0.5, 2014-03-30:
@@ -17,17 +17,14 @@ v1.0.3, 2013-07-29
  - The package now imports everything from lfm.lfm.
  - Better code organization here and there.
 
-
 v1.0.2, 2013-07-25
  - Fixed tag.get_info() having "artist" and "mbid" parameters instead of just "tag".
  - Fixed a bug where requests would be denied because of capitalized package names.
  - Fixed a bug in a utility function where only keys of a dictionary were being evaluated,
    instead of the values as well.
 
-
 v1.0.1, 2013-07-23
  - A shaped, working release.
-
 
 v1.0.0, 2013-06-26
  - The initial release.
