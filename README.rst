@@ -66,7 +66,7 @@ API methods are organized like so::
 
     data = app.package.method_name(...)
     
-So, if you wanted, for example, to fetch all recently listened tracks of a user,
+So, if you wanted to, for example, fetch all recently listened tracks of a user,
 you'd do something like this::
 
     tracks = app.user.get_recent_tracks(user)
@@ -111,9 +111,9 @@ After the user has granted access, all that's left is to fetch the session::
 *auth.get_url()*
 ~~~~~~~~~~~~~~~~~~~~
 
-The third one is for web apps. `auth.get_url()` takes one argument, a callback url,
-and returns an url which points to the authentication page. When the user
-authenticates, the page redirects to the callback url with the token appended as a
+The third one is for web apps. `auth.get_url()` takes one argument, a callback URL,
+and returns an URL which points to the authentication page. When the user
+authenticates, the page redirects to the callback URL with the token appended as a
 GET parameter.  
 For more information, consult the `official Last.fm documentation <http://www.last.fm/api/webauth>`_.
 
