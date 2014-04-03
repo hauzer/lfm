@@ -49,11 +49,11 @@ class Package:
     The base class for all packages.
     
     :param app:
-        The application whose :py:func:`~lfm.lfm.App.request` or :py:func:`~lfm.lfm.App.request_auto`
+        The application whose :py:func:`~lastfm.lfm.App.request` or :py:func:`~lastfm.lfm.App.request_auto`
         will be called by all methods inside the package.
     
     :type app:
-        :py:class:`~lfm.lfm.App`
+        :py:class:`~lastfm.lfm.App`
     
     """
 
@@ -67,6 +67,7 @@ class Album(Package):
     Represents the `API <http://www.last.fm/api>`_'s album package.
     
     """
+    
     
     def add_tags(self, artist, album, tags):
         self.app.request_auto()
@@ -107,6 +108,12 @@ class Album(Package):
         
         
 class Artist(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s artist package.
+    
+    """
+
+    
     def add_tags(self, artist, tags):
         self.app.request_auto()
     
@@ -189,6 +196,12 @@ class Artist(Package):
         
         
 class Auth(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s auth package.
+    
+    """
+
+    
     def get_mobile_session(self, username, password):
         data = self.app.request_auto()
         return data["session"]
@@ -211,6 +224,12 @@ class Auth(Package):
     
     
 class Chart(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s chart package.
+    
+    """
+
+    
     def get_hyped_artists(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["artists"]
@@ -242,6 +261,12 @@ class Chart(Package):
     
         
 class Event(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s event package.
+    
+    """
+    
+
     def attend(self, event, status):
         self.app.request_auto()
     
@@ -270,6 +295,12 @@ class Event(Package):
         
         
 class Geo(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s geo package.
+    
+    """
+
+    
     def get_events(self, tag = None, page = None, limit = None, long = None,
                    lat = None, location = None, distance = None, festivalsonly = None):
         data = self.app.request_auto()
@@ -333,6 +364,12 @@ class Geo(Package):
         
         
 class Group(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s group package.
+    
+    """
+
+    
     def get_hype(self, group):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
@@ -364,6 +401,12 @@ class Group(Package):
         
         
 class Library(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s library package.
+    
+    """
+
+    
     def add_album(self, albums):
         params = to_arrays(albums, ["artist", "album"])
         albums = None
@@ -416,6 +459,12 @@ class Library(Package):
         
         
 class Playlist(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s playlist package.
+    
+    """
+
+    
     def add_track(self, playlistid, artist, track):
         self.app.request_auto()
     
@@ -425,6 +474,12 @@ class Playlist(Package):
         
         
 class Radio(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s radio package.
+    
+    """
+
+    
     def get_playlist(self, bitrate = None, rtp = None, discovery = None, speed_multiplier = None, buylinks = None):
         data = self.app.request_auto()
         return data["playlist"]
@@ -441,6 +496,12 @@ class Radio(Package):
         
         
 class Tag(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s tag package.
+    
+    """
+
+    
     def get_info(self, tag = None, lang = None):
         data = self.app.request_auto()
         return data["tag"]
@@ -487,12 +548,24 @@ class Tag(Package):
         
         
 class Tasteometer(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s tasteometer package.
+    
+    """
+
+    
     def compare(self, type1, value1, type2, value2, limit = None):
         data = self.app.request_auto()
         return data["comparison"]
         
         
 class Track(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s track package.
+    
+    """
+
+    
     def add_tags(self, artist, track, tags):
         self.app.request_auto()
     
@@ -588,6 +661,12 @@ class Track(Package):
         
         
 class User(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s user package.
+    
+    """
+
+    
     def get_artist_tracks(self, user, artist, page = None, starttimestamp = None, endtimestamp = None):
         data = self.app.request_auto()
         return data["artisttracks"]
@@ -713,6 +792,12 @@ class User(Package):
         
         
 class Venue(Package):
+    """
+    Represents the `API <http://www.last.fm/api>`_'s venue package.
+    
+    """
+
+    
     def get_events(self, venue, festivalsonly = None):
         data = self.app.request_auto()
         return data["events"]
@@ -729,6 +814,12 @@ class Venue(Package):
 
 
 class Token:
+    """
+    The authentication token returned by some :py:class:`~lastfm.lfm.Auth` methods.
+    
+    """
+
+    
     def __str__(self):
         return self.str
     
@@ -739,6 +830,12 @@ class Token:
 
 
 class Scrobble:
+    """
+    The authentication token returned by some :py:class:`~lastfm.lfm.Auth` methods.
+    
+    """
+
+    
     def __init__(self, artist, track, timestamp, album = None, duration = None, mbid = None, \
                  tracknumber = None, albumartist = None, streamid = None, chosenbyuser = None, \
                  context = None):
@@ -848,6 +945,7 @@ class App:
         
         """
         
+        
         if not self.can_request():
             raise e.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
     
@@ -927,6 +1025,7 @@ class App:
         
         """
         
+        
         frame_record = inspect.stack()[1]
     
         if(method is None):
@@ -967,6 +1066,7 @@ class App:
             :mod:`string <python:string>`
         
         """
+    
     
         # Parameters are alphabetically sorted by their key, and then concatenated
         # in a keyvalue manner. The application's secret is appended afterwards,
