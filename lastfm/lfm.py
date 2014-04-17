@@ -20,7 +20,6 @@
 
 
 from . import info
-from . import exceptions   as e
 
 import  requests
 import  json
@@ -42,6 +41,64 @@ MAX_USERNAME_LENGTH     = 15
 
 KEY     = "312a23775128fd0f9a6d8d3e7a87a4b4"
 SECRET  = "d03bece4e91f9a25b0b2b78c75c7c327"
+
+
+#
+# Errors as shown on Last.fm API pages.
+#
+
+class RequestError(Exception): pass
+class InvalidServiceError(RequestError): pass
+class InvalidMethodError(RequestError): pass
+class AuthenticationFailedError(RequestError): pass
+class InvalidFormatError(RequestError): pass
+class InvalidParametersError(RequestError): pass
+class InvalidResourceSpecifiedError(RequestError): pass
+class OperationFailedError(RequestError): pass
+class InvalidSessionKeyError(RequestError): pass
+class InvalidApiKeyError(RequestError): pass
+class ServiceOfflineError(RequestError): pass
+class SubscribersOnlyError(RequestError): pass
+class InvalidMethodSignatureError(RequestError): pass
+class TokenNotAuthorizedError(RequestError): pass
+class TokenExpiredError(RequestError): pass
+class TemporaryErrorError(RequestError): pass
+class TrialExpiredError(RequestError): pass
+class NotEnoughContentError(RequestError): pass
+class NotEnoughMembersError(RequestError): pass
+class NotEnoughFansError(RequestError): pass
+class NotEnoughNeighboursError(RequestError): pass
+class SuspendedApiKeyError(RequestError): pass
+class StationDeprecatedError(RequestError): pass
+class GeoRestrictedError(RequestError): pass
+class RateLimitExceededError(RequestError): pass
+
+error_codes = {
+    2: InvalidServiceError,              # 2 : Invalid service - This service does not exist
+    3: InvalidMethodError,               # 3 : Invalid Method - No method with that name in this package
+    4: AuthenticationFailedError,        # 4 : Authentication Failed - You do not have permissions to access the service
+    5: InvalidFormatError,               # 5 : Invalid format - This service doesn't exist in that format
+    6: InvalidParametersError,           # 6 : Invalid parameters - Your request is missing a required parameter
+    7: InvalidResourceSpecifiedError,    # 7 : Invalid resource specified
+    8: OperationFailedError,             # 8 : Operation failed - Something else went wrong
+    9: InvalidSessionKeyError,           # 9 : Invalid session key - Please re-authenticate
+    10: InvalidApiKeyError,              # 10 : Invalid API key - You must be granted a valid key by last.fm
+    11: ServiceOfflineError,             # 11 : Service Offline - This service is temporarily offline. Try again later.
+    12: SubscribersOnlyError,            # 12 : Subscribers Only - This station is only available to paid last.fm subscribers
+    13: InvalidMethodSignatureError,     # 13 : Invalid method signature supplied
+    14: TokenNotAuthorizedError,         # 14 : This token has not been authorized
+    15: TokenExpiredError,               # 15 : This token has expired
+    16: TemporaryErrorError,             # 16 : There was a temporary error processing your request. Please try again
+    18: TrialExpiredError,               # 18 : Trial Expired - This user has no free radio plays left. Subscription required
+    20: NotEnoughContentError,           # 20 : Not Enough Content - There is not enough content to play this station
+    21: NotEnoughMembersError,           # 21 : Not Enough Members - This group does not have enough members for radio
+    22: NotEnoughFansError,              # 22 : Not Enough Fans - This artist does not have enough fans for for radio
+    23: NotEnoughNeighboursError,        # 23 : Not Enough Neighbours - There are not enough neighbours for radio
+    26: SuspendedApiKeyError,            # 26 : Suspended API key - Access for your account has been suspended, please contact Last.fm
+    27: StationDeprecatedError,          # 27 : Deprecated - This station is no longer available
+    28: GeoRestrictedError,              # 28 : Geo Restricted - This station is not available with this client/country combination
+    29: RateLimitExceededError,          # 29 : Rate limit exceeded - Your IP has made too many requests in a short period
+    }
 
 
 class Package:
@@ -831,7 +888,7 @@ class App:
         
         
         if not self.can_request():
-            raise e.RateLimitExceeded("Exceeded the limit of one request per five seconds over five minutes.")
+            raise RateLimitExceededError("Exceeded the limit of one request per five seconds over five minutes.")
     
     
         params.update({"api_key": self.key,
@@ -865,7 +922,7 @@ class App:
         data = json.loads(resp.text)
         
         try:
-            raise e.codes[data["error"]](data["message"])
+            raise error_codes[data["error"]](data["message"])
         except KeyError:
             pass
         
