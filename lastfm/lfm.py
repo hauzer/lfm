@@ -209,7 +209,7 @@ class Auth(Package):
     
     def get_token(self):
         data = self.app.request_auto()
-        token = lfm.Token(self.app, data["token"])
+        token = Token(self.app, data["token"])
         
         return token
     
