@@ -62,7 +62,7 @@ class Package:
         self.app = app
 
 
-class Album(Package):
+class AlbumPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s album package.
     
@@ -100,7 +100,7 @@ class Album(Package):
         return data["results"]
         
         
-class Artist(Package):
+class ArtistPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s artist package.
     
@@ -172,7 +172,7 @@ class Artist(Package):
         self.app.request_auto()
         
         
-class Auth(Package):
+class AuthPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s auth package.
     
@@ -197,7 +197,7 @@ class Auth(Package):
         return "http://www.last.fm/api/auth/?api_key={}&cb={}".format(self.app.key, callback)
     
     
-class Chart(Package):
+class ChartPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s chart package.
     
@@ -229,7 +229,7 @@ class Chart(Package):
         return data["tracks"]
     
         
-class Event(Package):
+class EventPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s event package.
     
@@ -258,7 +258,7 @@ class Event(Package):
         self.app.request_auto()
         
         
-class Geo(Package):
+class GeoPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s geo package.
     
@@ -317,7 +317,7 @@ class Geo(Package):
         return data["toptracks"]
         
         
-class Group(Package):
+class GroupPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s group package.
     
@@ -349,7 +349,7 @@ class Group(Package):
         return data["weeklytrackchart"]
         
         
-class Library(Package):
+class LibraryPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s library package.
     
@@ -398,7 +398,7 @@ class Library(Package):
         self.app.request_auto()
         
         
-class Playlist(Package):
+class PlaylistPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s playlist package.
     
@@ -412,7 +412,7 @@ class Playlist(Package):
         self.app.request_auto()
         
         
-class Radio(Package):
+class RadioPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s radio package.
     
@@ -432,7 +432,7 @@ class Radio(Package):
         return data["station"]
         
         
-class Tag(Package):
+class TagPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s tag package.
     
@@ -476,7 +476,7 @@ class Tag(Package):
         return data["results"]
         
         
-class Tasteometer(Package):
+class TasteometerPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s tasteometer package.
     
@@ -488,7 +488,7 @@ class Tasteometer(Package):
         return data["comparison"]
         
         
-class Track(Package):
+class TrackPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s track package.
     
@@ -571,7 +571,7 @@ class Track(Package):
         return data["nowplaying"]
         
         
-class User(Package):
+class UserPackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s user package.
     
@@ -678,7 +678,7 @@ class User(Package):
         self.app.request_auto()
         
         
-class Venue(Package):
+class VenuePackage(Package):
     """
     Represents the `API <http://www.last.fm/api>`_'s venue package.
     
@@ -768,21 +768,21 @@ class App:
 
 
     def __init__(self, key = KEY, secret = SECRET, db_file = None, info = None):
-        self.album       = Album(self)
-        self.artist      = Artist(self)
-        self.auth        = Auth(self)
-        self.chart       = Chart(self)
-        self.event       = Event(self)
-        self.geo         = Geo(self)
-        self.group       = Group(self)
-        self.library     = Library(self)
-        self.playlist    = Playlist(self)
-        self.radio       = Radio(self)
-        self.tag         = Tag(self)
-        self.tasteometer = Tasteometer(self)
-        self.track       = Track(self)
-        self.user        = User(self)
-        self.venue       = Venue(self)
+        self.album       = AlbumPackage(self)
+        self.artist      = ArtistPackage(self)
+        self.auth        = AuthPackage(self)
+        self.chart       = ChartPackage(self)
+        self.event       = EventPackage(self)
+        self.geo         = GeoPackage(self)
+        self.group       = GroupPackage(self)
+        self.library     = LibraryPackage(self)
+        self.playlist    = PlaylistPackage(self)
+        self.radio       = RadioPackage(self)
+        self.tag         = TagPackage(self)
+        self.tasteometer = TasteometerPackage(self)
+        self.track       = TrackPackage(self)
+        self.user        = UserPackage(self)
+        self.venue       = VenuePackage(self)
         
         self.key            = key
         self.secret         = secret
