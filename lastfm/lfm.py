@@ -102,30 +102,11 @@ error_codes = {
 
 
 class Package:
-    """
-    The base class for all packages.
-    
-    :param app:
-        The application whose :py:func:`~lastfm.lfm.App.request` or :py:func:`~lastfm.lfm.App.request_auto`
-        will be called by all methods inside the package.
-    
-    :type app:
-        :py:class:`~lastfm.lfm.App`
-    
-    """
-
-
     def __init__(self, app):
         self.app = app
-
+        
 
 class AlbumPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s album package.
-    
-    """
-    
-    
     def add_tags(self, artist, album, tags):
         self.app.request_auto()
     
@@ -158,12 +139,6 @@ class AlbumPackage(Package):
         
         
 class ArtistPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s artist package.
-    
-    """
-
-    
     def add_tags(self, artist, tags):
         self.app.request_auto()
     
@@ -230,12 +205,6 @@ class ArtistPackage(Package):
         
         
 class AuthPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s auth package.
-    
-    """
-
-    
     def get_mobile_session(self, username, password):
         data = self.app.request_auto()
         return data["session"]
@@ -255,12 +224,6 @@ class AuthPackage(Package):
     
     
 class ChartPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s chart package.
-    
-    """
-
-    
     def get_hyped_artists(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["artists"]
@@ -287,12 +250,6 @@ class ChartPackage(Package):
     
         
 class EventPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s event package.
-    
-    """
-    
-
     def attend(self, event, status):
         self.app.request_auto()
     
@@ -316,12 +273,6 @@ class EventPackage(Package):
         
         
 class GeoPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s geo package.
-    
-    """
-
-    
     def get_events(self, tag = None, page = None, limit = None, long = None,
                    lat = None, location = None, distance = None, festivalsonly = None):
         data = self.app.request_auto()
@@ -375,12 +326,6 @@ class GeoPackage(Package):
         
         
 class GroupPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s group package.
-    
-    """
-
-    
     def get_hype(self, group):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
@@ -407,12 +352,6 @@ class GroupPackage(Package):
         
         
 class LibraryPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s library package.
-    
-    """
-
-    
     def add_album(self, albums):
         params = to_arrays(albums, ["artist", "album"])
         albums = None
@@ -456,12 +395,6 @@ class LibraryPackage(Package):
         
         
 class PlaylistPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s playlist package.
-    
-    """
-
-    
     def add_track(self, playlistid, artist, track):
         self.app.request_auto()
     
@@ -470,12 +403,6 @@ class PlaylistPackage(Package):
         
         
 class RadioPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s radio package.
-    
-    """
-
-    
     def get_playlist(self, bitrate = None, rtp = None, discovery = None, speed_multiplier = None, buylinks = None):
         data = self.app.request_auto()
         return data["playlist"]
@@ -490,12 +417,6 @@ class RadioPackage(Package):
         
         
 class TagPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s tag package.
-    
-    """
-
-    
     def get_info(self, tag = None, lang = None):
         data = self.app.request_auto()
         return data["tag"]
@@ -534,24 +455,12 @@ class TagPackage(Package):
         
         
 class TasteometerPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s tasteometer package.
-    
-    """
-
-    
     def compare(self, type1, value1, type2, value2, limit = None):
         data = self.app.request_auto()
         return data["comparison"]
         
         
 class TrackPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s track package.
-    
-    """
-
-    
     def add_tags(self, artist, track, tags):
         self.app.request_auto()
     
@@ -629,12 +538,6 @@ class TrackPackage(Package):
         
         
 class UserPackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s user package.
-    
-    """
-
-    
     def get_artist_tracks(self, user, artist, page = None, starttimestamp = None, endtimestamp = None):
         data = self.app.request_auto()
         return data["artisttracks"]
@@ -736,12 +639,6 @@ class UserPackage(Package):
         
         
 class VenuePackage(Package):
-    """
-    Represents the `API <http://www.last.fm/api>`_'s venue package.
-    
-    """
-
-    
     def get_events(self, venue, festivalsonly = None):
         data = self.app.request_auto()
         return data["events"]
@@ -771,12 +668,6 @@ class Token:
 
 
 class Scrobble:
-    """
-    The authentication token returned by some :py:class:`~lastfm.lfm.Auth` methods.
-    
-    """
-
-    
     def __init__(self, artist, track, timestamp, album = None, duration = None, mbid = None, \
                  tracknumber = None, albumartist = None, streamid = None, chosenbyuser = None, \
                  context = None):
