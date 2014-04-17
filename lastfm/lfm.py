@@ -72,35 +72,28 @@ class Album(Package):
     def add_tags(self, artist, album, tags):
         self.app.request_auto()
     
-    
     def get_buy_links(self, country, artist = None, album = None, mbid = None, autocorrect = None):
         data = self.app.request_auto()
         return data["affiliations"]
-    
     
     def get_info(self, artist = None, album = None, username = None, autocorrect = None, lang = None, mbid = None):
         data = self.app.request_auto()
         return data["album"]
     
-    
     def get_shouts(self, artist = None, album = None, page = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["shouts"]
-    
     
     def get_tags(self, artist = None, album = None, user = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["tags"]
     
-    
     def get_top_tags(self, artist = None, album = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["toptags"]
     
-    
     def remove_tag(self, tag, artist, album):
         self.app.request_auto()
-    
     
     def search(self, album, page = None, limit = None):
         data = self.app.request_auto()
@@ -117,79 +110,63 @@ class Artist(Package):
     def add_tags(self, artist, tags):
         self.app.request_auto()
     
-    
     def get_corrections(self, artist):
         data = self.app.request_auto()
         return data["corrections"]
-    
     
     def get_events(self, artist = None, page = None, limit = None, autocorrect = None, festivalsonly = None, mbid = None):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_info(self, artist = None, username = None, autocorrect = None, lang = None, mbid = None):
         data = self.app.request_auto()
         return data["artist"]
-    
     
     def get_past_events(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_podcast(self, artist = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["rss"]
-    
     
     def get_shouts(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["shouts"]
     
-    
     def get_similar(self, artist = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["similarartists"]
-    
     
     def get_tags(self, artist = None, user = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["tags"]
     
-    
     def get_top_albums(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["topalbums"]
-    
     
     def get_top_fans(self, artist = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["topfans"]
     
-    
     def get_top_tags(self, artist = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["toptags"]
-    
     
     def get_top_tracks(self, artist = None, page = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["toptracks"]
     
-    
     def remove_tag(self, artist, tag):
         self.app.request_auto()
-    
     
     def search(self, artist, page, limit):
         data = self.app.request_auto()
         return data["results"]
     
-    
     def share(self, artist, recipient, message = None, public = None):
         self.app.request_auto()
-    
     
     def shout(self, artist, message):
         self.app.request_auto()
@@ -206,18 +183,15 @@ class Auth(Package):
         data = self.app.request_auto()
         return data["session"]
     
-    
     def get_token(self):
         data = self.app.request_auto()
         token = Token(self.app, data["token"])
         
         return token
     
-    
     def get_session(self, token):
         data = self.app.request_auto()
         return data["session"]
-    
     
     def get_url(self, callback):
         return "http://www.last.fm/api/auth/?api_key={}&cb={}".format(self.app.key, callback)
@@ -234,26 +208,21 @@ class Chart(Package):
         data = self.app.request_auto()
         return data["artists"]
 
-
     def get_hyped_tracks(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["tracks"]
-
 
     def get_loved_tracks(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["tracks"]
 
-
     def get_top_artists(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["artists"]
 
-
     def get_top_tags(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["tags"]
-
 
     def get_top_tracks(self, page = None, limit = None):
         data = self.app.request_auto()
@@ -270,25 +239,20 @@ class Event(Package):
     def attend(self, event, status):
         self.app.request_auto()
     
-    
     def get_attendees(self, event, page = None, limit = None):
         data = self.app.request_auto()
         return data["attendees"]
-    
     
     def get_info(self, event):
         data = self.app.request_auto()
         return data["event"]
     
-    
     def get_shouts(self, event, page = None, limit = None):
         data = self.app.request_auto()
         return data["shouts"]
     
-    
     def share(self, event, recipient, message = None, public = None):
         self.app.request_auto()
-    
     
     def shout(self, event, message):
         self.app.request_auto()
@@ -306,57 +270,47 @@ class Geo(Package):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_metro_artist_chart(self, metro, country, page = None, limit = None,
                                start = None, end = None):
         data = self.app.request_auto()
         return data["topartists"]
-    
     
     def get_metro_hype_artist_chart(self, metro, country, page = None, limit = None,
                                     start = None, end = None):
         data = self.app.request_auto()
         return data["topartists"]
     
-    
     def get_metro_hype_track_chart(self, metro, country, page = None, limit = None,
                                    start = None, end = None):
         data = self.app.request_auto()
         return data["toptracks"]
-    
     
     def get_metro_track_chart(self, metro, country, page = None, limit = None,
                               start = None, end = None):
         data = self.app.request_auto()
         return data["toptracks"]
     
-    
     def get_metro_unique_artist_chart(self, metro, country, page = None, limit = None,
                                       start = None, end = None):
         data = self.app.request_auto()
         return data["topartists"]
-    
     
     def get_metro_unique_track_chart(self, metro, country, page = None, limit = None,
                                      start = None, end = None):
         data = self.app.request_auto()
         return data["toptracks"]
     
-    
     def get_metro_weekly_chart_list(self, metro):
         data = self.app.request_auto()
         return data["weeklychartlist"]
-    
     
     def get_metros(self, country = None):
         data = self.app.request_auto()
         return data["metros"]
     
-    
     def get_top_artists(self, country, page = None, limit = None):
         data = self.app.request_auto()
         return data["topartists"]
-    
     
     def get_top_tracks(self, country, page = None, limit = None, location = None):
         data = self.app.request_auto()
@@ -374,26 +328,21 @@ class Group(Package):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
     
-    
     def get_members(self, group, page = None, limit = None):
         data = self.app.request_auto()
         return data["members"]
-    
     
     def get_weekly_album_chart(self, group, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklyalbumchart"]
     
-    
     def get_weekly_artist_chart(self, group, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
     
-    
     def get_weekly_chart_list(self, group):
         data = self.app.request_auto()
         return data["weeklychartlist"]
-    
     
     def get_weekly_track_chart(self, group, from_ = None, to = None):
         data = self.app.request_auto()
@@ -414,7 +363,6 @@ class Library(Package):
         data = self.app.request_auto(params)
         return data["albums"]
     
-    
     def add_artist(self, artists):
         params = to_array(artists, "artist")
         artists = None
@@ -422,37 +370,29 @@ class Library(Package):
         data = self.app.request_auto(params)
         return data["artists"]
     
-    
     def add_track(self, artist, track):
         self.app.request_auto()
-    
     
     def get_albums(self, user, artist, limit = None, page = None):
         data = self.app.request_auto()
         return data["albums"]
     
-    
     def get_artists(self, user, limit = None, page = None):
         data = self.app.request_auto()
         return data["artists"]
-    
     
     def get_tracks(self, user, artist, album, limit = None, page = None):
         data = self.app.request_auto()
         return data["tracks"]
     
-    
     def remove_album(self, artist, album):
         self.app.request_auto()
-    
     
     def remove_artist(self, artist):
         self.app.request_auto()
     
-    
     def remove_scrobble(self, artist, track, timestamp):
         self.app.request_auto()
-    
     
     def remove_track(self, artist, track):
         self.app.request_auto()
@@ -467,7 +407,6 @@ class Playlist(Package):
     
     def add_track(self, playlistid, artist, track):
         self.app.request_auto()
-    
     
     def create(self, title = None, description = None):
         self.app.request_auto()
@@ -484,11 +423,9 @@ class Radio(Package):
         data = self.app.request_auto()
         return data["playlist"]
     
-    
     def search(self, name):
         data = self.app.request_auto()
         return data["stations"]
-    
     
     def tune(self, station, lang = None):
         data = self.app.request_auto()
@@ -506,41 +443,33 @@ class Tag(Package):
         data = self.app.request_auto()
         return data["tag"]
     
-    
     def get_similar(self, tag):
         data = self.app.request_auto()
         return data["similartags"]
-    
     
     def get_top_albums(self, tag, page = None, limit = None):
         data = self.app.request_auto()
         return data["topalbums"]
     
-    
     def get_top_artists(self, tag, page = None, limit = None):
         data = self.app.request_auto()
         return data["topartists"]
-    
     
     def get_top_tags(self, ):
         data = self.app.request_auto()
         return data["toptags"]
     
-    
     def get_top_tracks(self, tag, page = None, limit = None):
         data = self.app.request_auto()
         return data["toptracks"]
-    
     
     def get_weekly_artist_chart(self, tag, limit = None, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
     
-    
     def get_weekly_chart_list(self, tag):
         data = self.app.request_auto()
         return data["weeklychartlist"]
-    
     
     def get_search(self, tag, page = None, limit = None):
         data = self.app.request_auto()
@@ -569,63 +498,50 @@ class Track(Package):
     def add_tags(self, artist, track, tags):
         self.app.request_auto()
     
-    
     def ban(self, artist, track):
         self.app.request_auto()
-    
     
     def get_buy_links(self, country, artist = None, track = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["affiliations"]
     
-    
     def get_corrections(self, artist, track):
         data = self.app.request_auto()
         return data["corrections"]
-    
     
     def get_fingerprint_metadata(self, fingerprintid):
         data = self.app.request_auto()
         return data["tracks"]
     
-    
     def get_info(self, artist = None, track = None, username = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["track"]
-    
     
     def get_shouts(self, artist = None, track = None, page = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["shouts"]
     
-    
     def get_similar(self, artist = None, track = None, limit = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["similartracks"]
-    
     
     def get_tags(self, artist = None, track = None, user = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["tags"]
     
-    
     def get_top_fans(self, artist = None, track = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["topfans"]
-    
     
     def get_top_tags(self, artist = None, track = None, autocorrect = None, mbid = None):
         data = self.app.request_auto()
         return data["toptags"]
     
-    
     def love(self, artist, track):
         self.app.request_auto()
     
-    
     def remove_tag(self, artist, track, tag):
         self.app.request_auto()
-    
     
     def scrobble(self, scrobbles):
         params = classes_to_arrays(scrobbles)
@@ -635,23 +551,18 @@ class Track(Package):
     
         return data["scrobbles"]
     
-    
     def search(self, track, artist = None, page = None, limit = None):
         data = self.app.request_auto()
         return data["results"]
     
-    
     def share(self, artist, track, recipient, message = None, public = None):
         self.app.request_auto()
-    
     
     def unban(self, artist, track):
         self.app.request_auto()
     
-    
     def unlove(self, artist, track):
         self.app.request_auto()
-    
     
     def update_now_playing(self, artist, track, album = None, duration = None, \
                            mbid = None, tracknumber = None, albumartist = None, \
@@ -671,121 +582,97 @@ class User(Package):
         data = self.app.request_auto()
         return data["artisttracks"]
     
-    
     def get_banned_tracks(self, user, page = None, limit = None):
         data = self.app.request_auto()
         return data["bannedtracks"]
-    
     
     def get_events(self, user, page = None, limit = None, festivalsonly = None):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_friends(self, user, page = None, limit = None, recenttracks = None):
         data = self.app.request_auto()
         return data["friends"]
-    
     
     def get_info(self, user = None):
         data = self.app.request_auto()
         return data["user"]
     
-    
     def get_loved_tracks(self, user, page = None, limit = None):
         data = self.app.request_auto()
         return data["lovedtracks"]
-    
     
     def get_neighbours(self, user, limit = None):
         data = self.app.request_auto()
         return data["neighbours"]
     
-    
     def get_new_releases(self, user, userecs = None):
         data = self.app.request_auto()
         return data["albums"]
-    
     
     def get_past_events(self, user, page = None, limit = None):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_personal_tags(self, user, tag, taggingtype, page = None, limit = None):
         data = self.app.request_auto()
         return data["taggings"]
-    
     
     def get_playlists(self, user):
         data = self.app.request_auto()
         return data["playlists"]
     
-    
     def get_recent_stations(self, user, page = None, limit = None):
         data = self.app.request_auto()
         return data["recentstations"]
-    
     
     def get_recent_tracks(self, user, extended = None, page = None, limit = None, from_ = None, to = None):
         data = self.app.request_auto()
         return data["recenttracks"]
     
-    
     def get_recommended_artists(self, page = None, limit = None):
         data = self.app.request_auto()
         return data["recommendations"]
-    
     
     def get_recommended_events(self, page = None, limit = None, latitude = None, longitude = None, festivalsonly = None):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_shouts(self, user, page = None, limit = None):
         data = self.app.request_auto()
         return data["shouts"]
-    
     
     def get_top_albums(self, user, period = None, page = None, limit = None):
         data = self.app.request_auto()
         return data["topalbums"]
     
-    
     def get_top_artists(self, user, period = None, page = None, limit = None):
         data = self.app.request_auto()
         return data["topartists"]
-    
     
     def get_top_tags(self, user, limit = None):
         data = self.app.request_auto()
         return data["toptags"]
     
-    
     def get_top_tracks(self, user, period = None, page = None, limit = None):
         data = self.app.request_auto()
         return data["toptracks"]
-    
     
     def get_weekly_album_chart(self, user, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklyalbumchart"]
     
-    
     def get_weekly_artist_chart(self, user, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklyartistchart"]
-    
     
     def get_weekly_chart_list(self, user):
         data = self.app.request_auto()
         return data["weeklychartlist"]
     
-    
     def get_weekly_track_chart(self, user, from_ = None, to = None):
         data = self.app.request_auto()
         return data["weeklytrackchart"]
-    
     
     def shout(self, user, message):
         self.app.request_auto()
@@ -802,11 +689,9 @@ class Venue(Package):
         data = self.app.request_auto()
         return data["events"]
     
-    
     def get_past_events(self, venue, page = None, limit = None, festivalsonly = None):
         data = self.app.request_auto()
         return data["events"]
-    
     
     def search(self, venue, page = None, limit = None, country = None):
         data = self.app.request_auto()
@@ -822,7 +707,6 @@ class Token:
     
     def __str__(self):
         return self.str
-    
     
     def __init__(self, app, token):
         self.str = token
@@ -913,8 +797,8 @@ class App:
                 self.db_create_table_timestamps()
         else:
             self.db = None
-        
 
+            
     def request(self, pkg, method, params):
         """
         Makes an API request.
