@@ -172,16 +172,17 @@ class PackageMetaclass(type):
                 def wrapper2(self, *args, **kwargs):
                     params = dict(zip(api_method_params, args))
                     
-                    custom_params = api_method(self, *args, **kwargs)
-                    try: params.update(custom_params)
-                    except TypeError: pass
+                    params_renames = api_method(self, *args, **kwargs)
+                    if params_renames is not None:
+                        for rename in params_renames.items():
+                            params[rename[1]] = params.pop(rename[0])
                     
-                    for k, v in params.items():
+                    for k, v in params.copy().items():
                         if isinstance(v, bool):
                             if v: params[k] = "1"
                             else: params[k] = "0"
                         else:
-                            try: param = v.as_parameter()
+                            try: param = v.as_parameter(k)
                             except AttributeError:
                                 params[k] = str(v)
                             else:
@@ -235,26 +236,27 @@ class DataMetaclass(ABCMeta):
         return super().__new__(cls, name, bases, attrs)
 
     def __init__(cls, name, bases, attrs):
-        from_xml = cls.from_xml
-        
-        @wraps(from_xml)
-        def wrapper(response, app):
-            xml = response_to_xml(response)
-            check_xml_for_errors(xml)
-            return from_xml(xml, app)
-            
-        cls.from_xml = wrapper
+        try:
+            from_xml = cls.from_xml
+        except AttributeError: pass
+        else:
+            @wraps(from_xml)
+            def wrapper(response, app):
+                xml = response_to_xml(response)
+                check_xml_for_errors(xml)
+                return from_xml(xml, app)
+                
+            cls.from_xml = wrapper
 
         return super().__init__(name, bases, attrs)
     
     
 class Data(metaclass = DataMetaclass):
     @staticmethod
-    @abstractmethod
     def from_xml(xml, app):
         pass
 
     @abstractmethod
-    def as_parameter(self):
+    def as_parameter(self, key):
         pass
         

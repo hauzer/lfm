@@ -3,6 +3,7 @@ import lfm.data as data
 
 
 class Album(api.Package):
+    @api.returns(data.Nothing)
     def add_tags(self, album, tags):
         pass
     
@@ -10,7 +11,9 @@ class Album(api.Package):
         pass
     
     def get_info(self, album, user = None, autocorrect = None, lang = None):
-        pass
+        return {
+            "user": "username"
+            }
     
     def get_shouts(self, album, page = None, autocorrect = None):
         pass
