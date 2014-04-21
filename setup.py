@@ -20,12 +20,13 @@
 #
 
 
-from    lastfm      import  info
-from    setuptools  import  find_packages, setup
+import imp
+from setuptools import setup, find_packages
 
+
+info = imp.load_source("info", r"./lfm/info.py")
 
 readme_lines = open("README.rst", "r").read().splitlines()
-
 description = readme_lines[0]
 long_description = "\n".join(readme_lines[2:])
 
