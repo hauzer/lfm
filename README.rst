@@ -1,5 +1,3 @@
-A Last.fm API interface.
-
 Features
 ========
 
